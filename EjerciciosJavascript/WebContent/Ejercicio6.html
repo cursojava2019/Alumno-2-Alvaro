@@ -2,9 +2,24 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Ejercicio 6</title>
 </head>
 <body>
-
+<h1>Adivina la contraseña</h1>
+<form name="formulario">
+<input type="password" name="password" size="30" maxlength="30" />
+<input type="button" onclick="javascript:cambia_de_pagina();" value="Entrar" />
+</form>
+<script>
+function cambia_de_pagina(){
+	if (document.formulario.password.value=='1234'){ 
+		alert("Contraseña correcta, entrando en Google");
+	    location.href="http://www.google.es";
+    } 
+    else{ 
+         alert("Contraseña incorrecta"); 
+    } 
+}
+</script>
 </body>
 </html>
