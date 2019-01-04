@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ejercicio 3</title>
+</head>
+<body>
+<h1>Formulario de registro</h1>
+<form>
+	<label>Nombre: <input type="text"></label><br>
+	<label>Apellidos: <input type="text"></label><br>
+	<label>Sexo: </label>
+	<label><input type="radio" name="sexo" value="hombre" checked="checked" /> Hombre</label>
+	<label><input type="radio" name="sexo" value="mujer" /> Mujer</label><br>
+	<label><input type="text">Correo: </label><br>
+	<label>Población</label>
+	<select id="poblacion">
+		<option value="" selected>-Elige una población-</option>
+		<option value="Alicante">Alicante</option>
+		<option value="Madrid">Madrid</option>
+		<option value="Sevilla">Sevilla</option>
+		<option value="Valencia">Valencia</option>
+	</select><br>
+	<label>Descripción:</label>
+	<textarea rows="4" cols="50"></textarea><br>
+	<label><input type="checkbox" checked> Deseo recibir información sobre novedades y ofertas</label><br>
+	<label><input type="checkbox"> Declaro haber leido y aceptar las condiciones generales del programa</label><br>
+	<input type="button" value="Enviar" />
+</form>
+</body>
+</html>
