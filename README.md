@@ -8,3 +8,5 @@ Repositorio para los ejercicios del curso de programación JAVA EE de Indra
 4. Ejercicios JQuery (0/6)
 5. Ejercicios Javascript (6/15)
 6. Ejercicios Java Básico (0/4)
+7. Ejercicios Java Objetos 1 (0/3)
+8. Ejercicios Java Objetos 2 (0/5)
