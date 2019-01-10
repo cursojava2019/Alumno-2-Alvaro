@@ -7,4 +7,4 @@
 5. Ejercicios Javascript (7/15)
 6. Ejercicios Java Básico (✓)
 7. Ejercicios Java Objetos 1 (✓)
-8. Ejercicios Java Objetos 2 (0/5)
+8. Ejercicios Java Objetos 2 (1/5)
