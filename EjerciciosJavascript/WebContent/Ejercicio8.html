@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ejercicio 8</title>
+<script type="text/javascript">
+
+function tratarTexto() {
+
+    var array_palabras = new Array();
+    var nueva_ventana;
+    var num_palabras
+  
+    array_palabras=miFormulario.miArea.value.split(" "); 
+    num_palabras=array_palabras.length;
+
+    nueva_ventana=window.open("","","width=375,height=275,menubar=no"); 
+    nueva_ventana.document.write("<center>");
+    nueva_ventana.document.write("<h3>Información sobre el texto introducido</h3>");
+    nueva_ventana.document.write("Número de palabras : ");
+    nueva_ventana.document.write("<b>" + num_palabras + "</b>");
+    nueva_ventana.document.write("<br>Primera palabra : ");
+    nueva_ventana.document.write(array_palabras[0].bold());
+    nueva_ventana.document.write("<br>Última palabra : ");
+    nueva_ventana.document.write(array_palabras[num_palabras-1].bold());
+    nueva_ventana.document.write("<br>Colocadas al revés:<br>");
+    nueva_ventana.document.write(array_palabras.reverse().join(", ").bold());
+    nueva_ventana.document.write("<br>Ordenadas de la 'a' a la 'z':<br>");
+    nueva_ventana.document.write(array_palabras.sort().join(", ").bold());
+    nueva_ventana.document.write("<br>Ordenadas de la 'z' a la 'a':<br>");
+    nueva_ventana.document.write(array_palabras.sort().reverse().join(", ").bold());
+    nueva_ventana.document.write("</center>");
+
+  }
+
+</script>
+</head>
+<body>
+<h1>Ejercicio 8</h1>
+<form name="miFormulario">
+<br><b>Introduce un texto:</b><br><br>
+<textarea name="miArea" rows=5 cols=30></textarea>
+<br><br>
+<input type=button value="Púlsame" name="miBoton" onClick="tratarTexto()">
+</form>
+</body>
+</html>
