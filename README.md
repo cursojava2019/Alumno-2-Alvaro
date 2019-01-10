@@ -1,6 +1,4 @@
-# Alumno-2-Alvaro
-
-Repositorio para los ejercicios del curso de programación JAVA EE de Indra
+# Repositorio para los ejercicios del curso de programación JAVA EE de Indra
 
 1. Ejercicios HTML (✓)
 2. Ejercicios CSS (✓)
