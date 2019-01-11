@@ -5,7 +5,7 @@ body {
 }
 
 @media (min-width: 1201px) {
-  h1 {
+  h1 { 
     text-align: center;
   }
 
