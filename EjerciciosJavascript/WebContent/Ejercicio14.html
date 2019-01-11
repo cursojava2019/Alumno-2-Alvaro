@@ -1,0 +1,21 @@
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ejercicio 14</title>
+<script type="text/javascript">
+imagen1= new Image()
+imagen1.src="http://innatia.info/images/galeria/azul-0.png"
+imagen2= new Image()
+imagen2.src="https://dical.es/499-large_default/fluorescente-rojo.jpg"
+function rollover(imagename, newsrc){
+	document.images[imagename].src=newsrc.src
+}
+</script>
+</head>
+<body style="text-align:center; margin:50px;">
+<p> Pasa el ratón sobre la imagen </p>
+<a  href="#" onmouseover="rollover('example', imagen2)" onmouseout="rollover('example', imagen1)">
+<img src="http://innatia.info/images/galeria/azul-0.png" name="example">
+</a>
+</body>
+</html>

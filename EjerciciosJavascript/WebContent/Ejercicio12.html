@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ejercicio 12</title>
+<script type="text/javascript">
+var pregunta1 = "0"; 
+var pregunta2 = "0"; 
+var pregunta3 = "0"; 
+
+function respuesta1(valor) {
+	pregunta1 = valor
+}
+
+function respuesta2(valor) {
+	pregunta2 = valor
+}
+
+function respuesta3(valor) {
+	pregunta3 = valor
+}
+
+function examinar() { 
+	puntuacion=0; 
+	nocontesta=0; 
+	contestadas=0; 
+	puntosmaximos=0; 
+	
+	if(pregunta1!= "0" ) {
+	  contestadas=contestadas+1
+	  puntosmaximos=puntosmaximos+3
+	  if(pregunta1 == "A") {
+		  puntuacion=puntuacion+3}
+	  if(pregunta1 == "B") {
+		  puntuacion=puntuacion+0}
+	  if(pregunta1 == "C") {
+		  puntuacion=puntuacion+0}
+	} else {
+		nocontesta=nocontesta+1
+	} 
+	
+	if(pregunta2 != "0")
+	{
+	  contestadas=contestadas+1
+	  puntosmaximos=puntosmaximos+3
+	  if(pregunta2 == "A") {
+		  puntuacion=puntuacion+0}
+	  if(pregunta2 == "B") {
+		  puntuacion=puntuacion+3}
+	  if(pregunta2 == "C") {
+		  puntuacion=puntuacion+0}
+	}
+	else {
+		nocontesta=nocontesta+1}
+	
+	if(pregunta3!= "0")
+	{
+	  contestadas=contestadas+1
+	  puntosmaximos=puntosmaximos+4
+	  if(pregunta3 == "A") {
+		  puntuacion=puntuacion+0}
+	  if(pregunta3 == "B") {
+		  puntuacion=puntuacion+0}
+	  if(pregunta3 == "C") {
+		  puntuacion=puntuacion+4}
+	}
+	else {
+		nocontesta=nocontesta+1
+	} 
+	
+	if (puntosmaximos!=0) {
+		indiceacierto=Math.round(100*(puntuacion/puntosmaximos))
+	} else {
+		indiceacierto=0
+	} 
+	
+	
+	if(indiceacierto == 100) {
+		mensaje="Has acertado las 3 preguntas ("+indiceacierto+"%)"} 
+	if(indiceacierto == 70) {
+		mensaje="Has acertado 2 de las 3 preguntas, una de ellas la última ("+indiceacierto+"%)"} 
+	if(indiceacierto == 60) {
+		mensaje="Has acertado 2 de las 3 preguntas ("+indiceacierto+"%)"} 
+	if(indiceacierto == 30) {
+		mensaje="Has acertado 1 de las 3 preguntas ("+indiceacierto+"%)"} 
+	if(indiceacierto == 0) {
+		mensaje="No has acertado ninguna pregunta ("+indiceacierto+"%)"} 
+	if(contestadas==0) {
+		mensaje="Al menos hay que responder a una pregunta"}
+	
+	alert(mensaje);
+
+}
+
+</script>
+</head>
+<body>
+
+<table width=600 border=1 align="center">
+
+<tr><td width="600">
+<b><font color="Blue">1. ¿Cual es la capital de España?</font></b>
+<blockquote>
+<input type="radio" name="pregunta1" value="A" onclick="respuesta1('A')">A. Madrid<br>
+<input type="radio" name="pregunta1" value="B" onclick="respuesta1('B')">B. Barcelona<br> 
+<input type="radio" name="pregunta1" value="C" onclick="respuesta1('C')">C. La Coruña<br> 
+</blockquote>
+</td></tr>
+
+<tr><td>
+<b><font color="Red">2. ¿Cual es la capital de Polonia?</font></b>
+<blockquote>
+<input type="radio" name="pregunta2" value="A" onclick="respuesta2('A')">A. Berlin<br> 
+<input type="radio" name="pregunta2" value="B" onclick="respuesta2('B')">B. Varsovia<br> 
+<input type="radio" name="pregunta2" value="C" onclick="respuesta2('C')">C. Minsk<br><br>
+</blockquote>
+</td></tr>
+ 
+<tr><td>
+<b><font color="Orange">3. ¿Cual es la capital de Irlanda?</font></b>
+<blockquote>
+<input type="radio" name="pregunta3" value="A" onclick="respuesta3('A')">A. Torshavn<br>
+<input type="radio" name="pregunta3" value="B" onclick="respuesta3('B')">B. Lublin<br>
+<input type="radio" name="pregunta3" value="C" onclick="respuesta3('C')">C. Dublin<br>
+</blockquote>
+
+<tr><td bgcolor=white> 
+<br>
+<center>
+<input type="button" name="submit" value="Validar" onclick="examinar()">
+<input type="button" name="solucion" value="Respuestas correctas" onclick="alert('Las respuestas son: 1.A, 2.B y 3.C')">
+</center>
+
+
+</body>
+</html>

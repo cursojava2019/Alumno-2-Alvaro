@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+<title>Ejercicio 10</title> 
+<script type="text/javascript"> 
+function mueveReloj(){ 
+   	momentoActual = new Date() 
+   	hora = momentoActual.getHours() 
+   	minuto = momentoActual.getMinutes() 
+   	segundo = momentoActual.getSeconds() 
+
+   	str_segundo = new String (segundo) 
+   	if (str_segundo.length == 1) 
+      	segundo = "0" + segundo 
+
+   	str_minuto = new String (minuto) 
+   	if (str_minuto.length == 1) 
+      	minuto = "0" + minuto 
+
+   	str_hora = new String (hora) 
+   	if (str_hora.length == 1) 
+      	hora = "0" + hora 
+
+   	horaImprimible = hora + " : " + minuto + " : " + segundo 
+
+   	document.form_reloj.reloj.value = horaImprimible 
+
+   	setTimeout("mueveReloj()",1000) 
+} 
+
+var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+var f=new Date();
+document.write(f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());
+</script> 
+</head> 
+
+<body onload="mueveReloj()"> 
+
+<h3>Hora actual</h3>
+
+<form name="form_reloj"> 
+<input type="text" name="reloj" size="10" style="background-color : Black; color : White; font-family : Verdana, Arial, Helvetica; font-size : 8pt; text-align : center;" onfocus="window.document.form_reloj.reloj.blur()"> 
+</form> 
+
+</body> 
+</html> 
