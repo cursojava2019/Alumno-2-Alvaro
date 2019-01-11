@@ -6,6 +6,7 @@
   3. Ejercicios Bootstrap (✓)
   4. Ejercicios JQuery (0/6)
   5. Ejercicios Javascript (✓)
+
 **__X. Complemento al curso__**
   6. Ejercicios Java Básico (✓)
   7. Ejercicios Java Objetos 1 (✓)
