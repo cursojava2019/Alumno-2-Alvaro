@@ -4,7 +4,7 @@
   1. Ejercicios HTML (✓)
   2. Ejercicios CSS (✓)
   3. Ejercicios Bootstrap (✓)
-  4. Ejercicios JQuery (0/6)
+  4. Ejercicios JQuery (✓)
   5. Ejercicios Javascript (✓)
 
 **__X. Complemento al curso__**
