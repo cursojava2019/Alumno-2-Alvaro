@@ -1,4 +1,4 @@
-# Repositorio para los ejercicios del curso de programación JAVA EE de Indra
+# Indice
 
 **__1. Tecnologías Web__**
   1. Ejercicios HTML (✓)
@@ -9,6 +9,6 @@
 
 **__X. Complemento al curso__**
 
-  6. Ejercicios Java Básico (✓)
-  7. Ejercicios Java Objetos 1 (✓)
-  8. Ejercicios Java Objetos 2 (1/5)
+  1. Ejercicios Java Básico (✓)
+  2. Ejercicios Java Objetos 1 (✓)
+  3. Ejercicios Java Objetos 2 (4/5)
