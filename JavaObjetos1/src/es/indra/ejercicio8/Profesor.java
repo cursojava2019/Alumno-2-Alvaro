@@ -37,4 +37,16 @@ public class Profesor extends Persona {
 		return falta;
 	}
 	
+	public String asignatura(String materia) {
+		String asignatura = "null";
+		if (materia.equalsIgnoreCase("Matematicas") || materia.equalsIgnoreCase("Filosofia")
+				|| materia.equalsIgnoreCase(""
+						+ "Fisica")) {
+			asignatura = materia;
+		} else {
+			asignatura = "Matematicas";
+		}
+		return asignatura;
+	}
+	
 }
