@@ -1,0 +1,1 @@
+Venta [vehiculo=Vehiculo [codigo=12, marca=Seat, tipo=coche, anio=2018, kilometraje=560, vendido=true], comprador=Comprador [dni=77379216V, nombre=Alvaro, apellidos=Jimenez, telefono=697732091, direccion=calle falsa, cp=23100, propiedades=[Vehiculo [codigo=12, marca=Seat, tipo=coche, anio=2018, kilometraje=560, vendido=true]]], precioVenta=12000.0]
