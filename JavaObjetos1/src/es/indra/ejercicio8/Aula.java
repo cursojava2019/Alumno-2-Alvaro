@@ -53,8 +53,13 @@ public class Aula {
 		return darClase;
 	}
 	
-	public void darNotas() {
-		
+	public void notasDeClase() {
+		if (darClase() == true) {
+			for (Alumno a : this.alumnos) {
+				System.out
+						.println(e.nombre + " tienes un " + e.Calificacion + " en la asignatura de " + this.destinada);
+			}
+		}
 	}
 	
 }
