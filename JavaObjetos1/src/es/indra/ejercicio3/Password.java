@@ -3,7 +3,7 @@ package es.indra.ejercicio3;
 public class Password {
 	private final static int LONGITUD = 8;
 	private int longitud;
-	private String contrasena;
+	private String contrasena; 
 	
 	public Password() {
 		this(LONGITUD);

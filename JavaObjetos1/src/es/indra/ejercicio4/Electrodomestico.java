@@ -8,7 +8,7 @@ public class Electrodomestico {
 
 	protected Float precioBase;
 	protected Color color;
-	protected Character clasificacion;
+	protected Character clasificacion; 
 	protected Float Peso;
 
 	public Electrodomestico() {

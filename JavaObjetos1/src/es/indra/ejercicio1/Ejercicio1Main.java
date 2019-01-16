@@ -13,7 +13,7 @@ public class Ejercicio1Main {
 	}
 
 	public static void main(String[] args) {
-		inicializar();
+		inicializar(); 
 		int opcion=0;
 		do {
 			System.out.println("Introduce la operación a realizar");

@@ -8,7 +8,7 @@ public class Libro {
 
 	public Libro(int aISBN, String aTitulo, String aAutor, int aNumeroPaginas){
 	     
-        ISBN=aISBN;
+        ISBN=aISBN; 
         titulo=aTitulo;
         autor=aAutor;
         numeroPaginas=aNumeroPaginas;

@@ -7,7 +7,7 @@ public class Raices {
 	
 	public Raices(double a, double b, double c) {
 		super();
-		this.a = a;
+		this.a = a; 
 		this.b = b;
 		this.c = c;
 	}

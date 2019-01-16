@@ -3,7 +3,7 @@ package es.indra.ejercicio5;
 public class Ejercicio5Main {
 
 	public static void main(String[] args) {
-		Serie listaSeries[] = new Serie[5];
+		Serie listaSeries[] = new Serie[5]; 
 		Videojuego listaVideojuegos[] = new Videojuego[5];
 		
 		listaSeries[0]=new Serie();

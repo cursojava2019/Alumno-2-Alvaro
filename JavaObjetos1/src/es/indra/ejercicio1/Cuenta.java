@@ -10,7 +10,7 @@ public class Cuenta {
 	}
 	
 	public Cuenta(String titular, double cantidad) {
-		this.titular = titular;
+		this.titular = titular; 
 		this.cantidad = cantidad;
 	}
 

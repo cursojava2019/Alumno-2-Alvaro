@@ -4,7 +4,7 @@ public class Serie implements Entregable {
 	private final static int NUMEROTEMPORADAS = 3;
 	public final static int MAYOR=1;
     public final static int MENOR=-1;
-    public final static int IGUAL=0;
+    public final static int IGUAL=0; 
 	private String titulo;
 	private int numeroTemporadas;
 	private boolean entregado;

@@ -6,7 +6,8 @@ public class Profesor extends Persona {
 	
 	public Profesor(String nombre, int edad, String sexo, String materia) {
 		super(nombre, edad, sexo);
-
+		this.materia = asignatura(materia);
+		this.falta = falta();
 	}
 
 	public String getMateria() {

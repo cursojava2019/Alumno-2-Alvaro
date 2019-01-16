@@ -42,22 +42,23 @@ public class Aula {
 		this.destinada = destinada;
 	}
 	
-	public boolean darClase() {
-		boolean darClase = true;
+	public Boolean darClase() {
+		Boolean seDaClase = null;
+
 		if (this.profesor.falta() == false && this.profesor.getMateria().equalsIgnoreCase(this.destinada)
-				&& this.alumnos.size() >= (this.maxAlumnos / 2)) {
-			darClase = true;
+				&& this.alumnos.size() > (this.maxAlumnos / 2)
+				&& this.alumnos.size() <= (this.maxAlumnos)) {
+			seDaClase = true;
 		} else {
-			darClase = false;
+			seDaClase = false;
 		}
-		return darClase;
+		return seDaClase;
 	}
 	
 	public void notasDeClase() {
 		if (darClase() == true) {
 			for (Alumno a : this.alumnos) {
-				System.out
-						.println(e.nombre + " tienes un " + e.Calificacion + " en la asignatura de " + this.destinada);
+				System.out.println(a.getNombre() + " tienes un " + a.getCalificacion() + " en  " + this.destinada);
 			}
 		}
 	}

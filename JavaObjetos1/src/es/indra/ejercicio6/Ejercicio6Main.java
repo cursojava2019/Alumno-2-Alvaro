@@ -4,7 +4,7 @@ public class Ejercicio6Main {
 
 	public static void main(String[] args) {
 		Libro l1=new Libro(1234567890, "Jaque al psicoanalista", "John Katzenbach", 440);
-        Libro l2=new Libro(1357986420, "Amanece, que no es poco", "Jose Luis Cuerda", 312);
+        Libro l2=new Libro(1357986420, "Amanece, que no es poco", "Jose Luis Cuerda", 312); 
         
         System.out.println(l1.toString());
         System.out.println(l2.toString());

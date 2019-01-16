@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ejercicio3Main {
 	
-	private static Scanner entrada;
+	private static Scanner entrada; 
 
 	public static void main(String[] args) {
 		entrada = new Scanner(System.in);

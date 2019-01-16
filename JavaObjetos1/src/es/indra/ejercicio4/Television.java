@@ -10,7 +10,7 @@ public class Television extends Electrodomestico {
 	public Television() {
 		super();
 		this.resolucion = RESOLUCION_DEFECTO;
-		this.sintonizador = TDT_DEFECTO;
+		this.sintonizador = TDT_DEFECTO; 
 	}
 
 	public Television(Float precioBase, Float peso) {

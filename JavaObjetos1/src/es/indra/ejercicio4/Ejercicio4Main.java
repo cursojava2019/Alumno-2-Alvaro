@@ -2,7 +2,7 @@ package es.indra.ejercicio4;
 
 import java.util.ArrayList;
 
-public class Ejercicio4Main {
+public class Ejercicio4Main { 
 
 	public static void main(String[] args) {
 		Television t1 = new Television((float) 300, (float) 10.0);

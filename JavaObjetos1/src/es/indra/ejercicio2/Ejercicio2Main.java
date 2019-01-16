@@ -8,7 +8,7 @@ public class Ejercicio2Main {
 
 	public static void main(String[] args) {
 		entrada = new Scanner(System.in);
-		System.out.println("Introduce el nombre");
+		System.out.println("Introduce el nombre"); 
 		String nombre = entrada.next();
 		System.out.println("Introduce la edad");
 		int edad = entrada.nextInt();

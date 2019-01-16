@@ -6,7 +6,7 @@ public class Videojuego implements Entregable {
     public final static int MENOR=-1;
     public final static int IGUAL=0;
 	private String titulo;
-	private int horasEstimadas;
+	private int horasEstimadas; 
 	private boolean entregado;
 	private String genero;
 	private String compañia;

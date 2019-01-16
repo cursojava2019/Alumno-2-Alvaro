@@ -7,7 +7,7 @@ public class Persona {
 	final static int SOBREPESO = 1;
 	private String nombre;
 	private int edad;
-	private String dni;
+	private String dni; 
 	private String sexo;
 	private double peso;
 	private double altura;
