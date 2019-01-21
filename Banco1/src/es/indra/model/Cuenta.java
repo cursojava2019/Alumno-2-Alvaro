@@ -1,60 +1,100 @@
 package es.indra.model;
 
-public class Cuenta {
-	private static final double INTERESCC = 0.1;
-	private static final double INTERESCV = 0.2;
-	private static final double INTERESFI = 0.34;
-	private String tipoCuenta;
-	private double comision;
-	private Float saldo;
+import java.io.Serializable;
+
+public class Cuenta implements Serializable{
 	
+	public static Float COMISION_DEFECTO =  (float) 0.6;
+	public static String CUENTA_CORRIENTE="CC";
+	public static String CUENTA_VIVIENDA="CV";
+	public static String FONDO_INVERSION="FI";
+	
+	private String id;
+	private Float comision;
+	private Cliente cliente;
+	private String tipocuenta;
+	private Float saldo;
+
+	public Cuenta(String id, Cliente cliente,  String tipocuenta, Float saldo) {
+		super();
+		this.id=id;
+		this.cliente=cliente;
+		this.comision = COMISION_DEFECTO;
+		this.tipocuenta = tipocuenta;
+		this.saldo=(float) 0;
+	}
+
 	public Cuenta() {
 		super();
-		this.comision = new Double(0.6);
 	}
-
-	public Cuenta(String tipoCuenta, double comision, Float saldo) {
-		super();
-		this.tipoCuenta = tipoCuenta;
-		this.comision = comision;
-		this.saldo = saldo;
-	}
-
-	public String getTipoCuenta() {
-		return tipoCuenta;
-	}
-
-	public void setTipoCuenta(String tipoCuenta) {
-		this.tipoCuenta = tipoCuenta;
-	}
-
-	public double getComision() {
+	
+	public Float getComision() {
 		return comision;
 	}
+	
+	public String getTipocuenta() {
+		return tipocuenta;
+	}
 
-	public void setComision(double comision) {
+	public void setComision(Float comision) {
 		this.comision = comision;
 	}
 
+
+	public void setTipocuenta(String tipocuenta) {
+		this.tipocuenta = tipocuenta;
+	}
+	
 	public Float getSaldo() {
 		return saldo;
 	}
-
+	
 	public void setSaldo(Float saldo) {
-		this.saldo = saldo;
+		this.saldo=saldo;
 	}
 
-	@Override
-	public String toString() {
-		return "Cuenta [tipoCuenta=" + tipoCuenta + ", comision=" + comision + ", saldo=" + saldo + "]";
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
-	public String validarTipoCuenta(String cuenta) {
-		if(cuenta.equals("Cuenta Corriente") || cuenta.equals("Cuenta Vivienda") || cuenta.equals("Fondo Inversion")) {
-			return cuenta;
+	public Cliente getCliente() {
+		return this.cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	
+	
+   
+	@Override
+	public String toString() {
+		return "Cuenta [id=" + id + ", comision=" + comision + ", cliente=" + cliente + ", tipocuenta=" + tipocuenta
+				+ ", saldo=" + saldo + "]";
+	}
+
+	public Float interes(String tipocuenta) {
+		Float aux = (float) 0;
+		if (tipocuenta.equalsIgnoreCase("CC")) {
+			aux = (float) 0.1;
+			return aux;
+		} else if (tipocuenta.equalsIgnoreCase("CV")) {
+			aux = (float) 0.2;
+			return aux;
 		} else {
-			return "Cuenta sin tipo definido";
+			aux = (float) 0.34;
+			return aux;
 		}
 	}
 	
+	public void revisionMensual() {
+		Float s = (float) 0;
+		s = getSaldo()* this.interes(this.tipocuenta) - this.comision;
+		setSaldo(s);
+		System.out.println("Revision mensual realizada");
+	}
 }

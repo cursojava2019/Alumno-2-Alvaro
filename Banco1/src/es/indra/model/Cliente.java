@@ -1,14 +1,17 @@
 package es.indra.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Cliente {
+public class Cliente implements Serializable{
 	private String dni;
 	private String nombre;
 	private String apellidos;
 	private String direccion;
 	private String telefono;
-	private ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
+
+	public Cliente() {
+		super();
+	}
 	
 	public Cliente(String dni, String nombre, String apellidos, String direccion, String telefono) {
 		super();
@@ -18,7 +21,7 @@ public class Cliente {
 		this.direccion = direccion;
 		this.telefono = telefono;
 	}
-
+	
 	public String getDni() {
 		return dni;
 	}
@@ -26,7 +29,7 @@ public class Cliente {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -34,7 +37,7 @@ public class Cliente {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
+	
 	public String getApellidos() {
 		return apellidos;
 	}
@@ -42,7 +45,7 @@ public class Cliente {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-
+	
 	public String getDireccion() {
 		return direccion;
 	}
@@ -50,7 +53,7 @@ public class Cliente {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-
+	
 	public String getTelefono() {
 		return telefono;
 	}
@@ -59,18 +62,11 @@ public class Cliente {
 		this.telefono = telefono;
 	}
 
-	public ArrayList<Cuenta> getCuentas() {
-		return cuentas;
-	}
-
-	public void setCuentas(ArrayList<Cuenta> cuentas) {
-		this.cuentas = cuentas;
-	}
-
 	@Override
 	public String toString() {
 		return "Cliente [dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos + ", direccion=" + direccion
-				+ ", telefono=" + telefono + ", cuentas=" + cuentas + "]";
+				+ ", telefono=" + telefono + "]";
 	}
+	
 	
 }
