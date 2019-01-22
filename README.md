@@ -14,4 +14,4 @@
   3. Ejercicios Java Objetos 2 (✓)
   4. Ejercicios Java Colecciones y ficheros (✓)
   5. Ejercicios Base de datos Entidad-Relación (0/6)
-  5. Ejercicios Java JDBC (1/2)
+  6. Ejercicios Java JDBC (✓)
