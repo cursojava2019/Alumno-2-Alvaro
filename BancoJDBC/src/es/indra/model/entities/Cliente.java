@@ -1,6 +1,8 @@
 package es.indra.model.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cliente implements Serializable{
 	private String dni;
@@ -8,6 +10,7 @@ public class Cliente implements Serializable{
 	private String apellidos;
 	private String direccion;
 	private String telefono;
+	private List<Cuenta> propiedades = new ArrayList<Cuenta>();
 
 	public Cliente() {
 		super();
@@ -60,6 +63,14 @@ public class Cliente implements Serializable{
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public List<Cuenta> getPropiedades() {
+		return propiedades;
+	}
+
+	public void setPropiedades(List<Cuenta> propiedades) {
+		this.propiedades = propiedades;
 	}
 
 	@Override

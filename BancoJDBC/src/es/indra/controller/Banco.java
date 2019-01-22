@@ -5,8 +5,12 @@ import java.util.TreeMap;
 
 import es.indra.model.entities.Cliente;
 import es.indra.model.entities.Cuenta;
+import es.indra.model.service.ClienteService;
+import es.indra.model.service.CuentaService;
 
 public class Banco implements Serializable {
+	ClienteService clienteService;
+	CuentaService cuentaService;
 	private TreeMap<String, Cliente> cliente;
 	private TreeMap<String, Cuenta> cuenta;
 
@@ -14,6 +18,8 @@ public class Banco implements Serializable {
 		super();
 		this.cliente = new TreeMap<String, Cliente>();
 		this.cuenta = new TreeMap<String, Cuenta>();
+		this.clienteService = new ClienteService();
+		this.cuentaService = new CuentaService();
 	}
 
 	public TreeMap<String, Cliente> getCliente() {
@@ -43,56 +49,60 @@ public class Banco implements Serializable {
 		return this.cliente.get(dni);
 	}
 
-	public Cuenta obtenerCuenta(String numero) {
-		return this.cuenta.get(numero);
+	public Cuenta obtenerCuenta(String dni,String id) {
+		Cuenta c = null;
+		
+		if (this.cuentaService.find(id) != null && this.cuentaService.find(id).getDnicliente().equals(dni)) {
+			c = this.cuentaService.find(id);
+
+		}
+		return c;
 	}
 
 	public Boolean introducirCliente(Cliente c) {
-		this.cliente.put(c.getDni(), c);
+		this.clienteService.create(c);
 		return true;
 	}
 
 	public Boolean crearCuenta(Cuenta c) {
-		this.cuenta.put(c.getId(), c);
+		this.cuentaService.create(c);
 		return true;
 	}
 
-	public Cuenta realizarIngreso(String dni, String id, Float cantidad) {
-		Float s;
-		Cliente cliente = this.cliente.get(dni);
-		Cuenta cuenta = this.cuenta.get(id);
-		if (cliente != null && cuenta != null && cuenta.getCliente().equals(cliente)) {
-			s = cuenta.getSaldo() + cantidad;
-			cuenta.setSaldo(s);
-			return cuenta;
-		} else {
-			return null;
-		}
+	public Cuenta realizarIngreso(Cuenta c,Float cantidad) {
+		if(c.getTipocuenta().equals("CC")) {	  
+			   c=this.cuentaService.aniadirSaldoService(c,cantidad);
+			   if(c != null) {
+				   this.cuentaService.update(c);
+			   }else {
+				   System.out.println("Ha habido algun error al ingresar el dinero");
+			   }
+			  
+		  }
+		return c;
 	}
 
-	public Cuenta sacarDinero(String dni, String codigo, Float cantidad) {
-		Float s;
-		Cliente cliente = this.cliente.get(dni);
-		Cuenta cuenta = this.cuenta.get(codigo);
-		if (cliente != null && cuenta != null && cuenta.getCliente().equals(cliente) && comprobarOperacion(codigo,cantidad, cuenta.getTipocuenta())) {
-		     	s = cuenta.getSaldo() - cantidad;
-		     	cuenta.setSaldo(s);
-			    return cuenta;		  
-		} 
-		else {
-			return null;
-		}
+	public Cuenta sacarDinero(Cuenta c,Float cantidad) {
+		if(c.getTipocuenta().equals("CC")) {	  
+			   c=this.cuentaService.retirarSaldoService(c,cantidad);
+			   if(c != null) {
+				   this.cuentaService.update(c);
+			   }else {
+				   System.out.println("Ha habido algun error al retirar el dinero");
+			   }
+			  
+		  }
+		return c;
 	}
 
-	public Cuenta revisionMensual(String dni, String codigo) {
-		Cliente cliente = this.cliente.get(dni);
-		Cuenta cuenta = this.cuenta.get(codigo);
-		if (cliente != null && cuenta != null && cuenta.getCliente().equals(cliente)) {
-			cuenta.revisionMensual();
-			return cuenta;
-		} else {
-			return null;
-		}
+	public Cuenta forzarRevisionMensual(Cuenta c) {	  
+		c=this.cuentaService.forzarRevision(c);
+		if(c != null) {
+			this.cuentaService.update(c);
+			} else {
+				System.out.println("Ha habido algun error al realizar la revision mensual");
+			}
+		return c;
 	}
 	
 	public Boolean comprobarOperacion(String codigo, Float cantidad, String tipoCuenta) {

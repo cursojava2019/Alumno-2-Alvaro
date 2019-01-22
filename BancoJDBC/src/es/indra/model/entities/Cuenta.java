@@ -11,48 +11,23 @@ public class Cuenta implements Serializable{
 	
 	private String id;
 	private Float comision;
-	private Cliente cliente;
 	private String tipocuenta;
 	private Float saldo;
-
-	public Cuenta(String id, Cliente cliente,  String tipocuenta, Float saldo) {
-		super();
-		this.id=id;
-		this.cliente=cliente;
-		this.comision = COMISION_DEFECTO;
-		this.tipocuenta = tipocuenta;
-		this.saldo=(float) 0;
-	}
-
+	private String dnicliente;
+	
 	public Cuenta() {
 		super();
 	}
-	
-	public Float getComision() {
-		return comision;
-	}
-	
-	public String getTipocuenta() {
-		return tipocuenta;
-	}
 
-	public void setComision(Float comision) {
+	public Cuenta(String id, Float comision, String tipocuenta, Float saldo, String dnicliente) {
+		super();
+		this.id = id;
 		this.comision = comision;
-	}
-
-
-	public void setTipocuenta(String tipocuenta) {
 		this.tipocuenta = tipocuenta;
+		this.saldo = saldo;
+		this.dnicliente = dnicliente;
 	}
-	
-	public Float getSaldo() {
-		return saldo;
-	}
-	
-	public void setSaldo(Float saldo) {
-		this.saldo=saldo;
-	}
-
+   
 	public String getId() {
 		return id;
 	}
@@ -60,20 +35,42 @@ public class Cuenta implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	public Cliente getCliente() {
-		return this.cliente;
+
+	public Float getComision() {
+		return comision;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setComision(Float comision) {
+		this.comision = comision;
 	}
-	
-	
-   
+
+	public String getTipocuenta() {
+		return tipocuenta;
+	}
+
+	public void setTipocuenta(String tipocuenta) {
+		this.tipocuenta = tipocuenta;
+	}
+
+	public Float getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Float saldo) {
+		this.saldo = saldo;
+	}
+
+	public String getDnicliente() {
+		return dnicliente;
+	}
+
+	public void setDnicliente(String dnicliente) {
+		this.dnicliente = dnicliente;
+	}
+
 	@Override
 	public String toString() {
-		return "Cuenta [id=" + id + ", comision=" + comision + ", cliente=" + cliente + ", tipocuenta=" + tipocuenta
+		return "Cuenta [id=" + id + ", comision=" + comision + ", tipocuenta=" + tipocuenta
 				+ ", saldo=" + saldo + "]";
 	}
 

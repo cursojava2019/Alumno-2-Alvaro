@@ -10,7 +10,7 @@ public interface Dao<K, O> {
 
 	public void delete(K key) throws DaoException;
 
-	public O find(K key) throws DaoException;
+	public O find(String id) throws DaoException;
 
 	public List<O> findAll() throws DaoException;
 

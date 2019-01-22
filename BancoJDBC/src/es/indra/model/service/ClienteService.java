@@ -14,7 +14,7 @@ public class ClienteService extends Service<String, Cliente> {
 		if (this.dao == null) {
 			this.dao = new ClienteDao();
 		}
-		return (Dao<String, Cliente>) this.dao;
+		return this.dao;
 	}
 
 }
