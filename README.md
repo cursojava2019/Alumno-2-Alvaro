@@ -6,7 +6,10 @@
   3. Ejercicios Bootstrap (✓)
   4. Ejercicios JQuery (✓)
   5. Ejercicios Javascript (✓)
-
+  
+**__1. Tecnologías Web__**
+  1. Proyecto Academia (en progreso)
+  
 **__X. Complemento al curso__**
 
   1. Ejercicios Java Básico (✓)
