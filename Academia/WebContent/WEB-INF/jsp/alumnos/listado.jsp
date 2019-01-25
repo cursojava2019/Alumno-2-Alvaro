@@ -8,8 +8,9 @@
 	if (listado==null){
 		listado=new ArrayList<Alumno>();
 	}
+	String patronBusqueda= request.getParameter("patron");
+  if (patronBusqueda==null) patronBusqueda="";  
 %>    
-    
     
 <!DOCTYPE html>
 <html>
@@ -31,9 +32,38 @@
             <div class="row">
             <div class="col-lg-12">
             	<div class="panel panel-default">
+                        <%if (request.getParameter("mensaje")!=null){ %>
+                        <div class="alert alert-success" id="mensaje">
+                               Operación realizada correctamente
+                            </div>
+                            <%} %>
                         <div class="panel-heading">
                             Listado de Alumnos
                         </div>
+                        
+                        <form name="buscador" action="./listado.html" method="post">
+                        <div class="">
+                        <div class="col-6">
+                        <label>Buscar Alumno</label>
+                        </div>
+                        <div style="float:right;">  <button class="btn btn-default"  onclick="location.href='<%=request.getContextPath()%>/admin/alumnos/nuevo.html';" type="button"><i class="fa fa-user"> Nuevo Usuario</i>
+                                                </button></div>
+                        <div class="col-6">
+                                            <input class="" name="patron" type="text" value="<%=patronBusqueda%>">
+                                            <span class="">
+                                                <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                            <%if (!patronBusqueda.equals("")) { %>
+                                            <span>Busqueda filtrada por <strong><%=patronBusqueda %> </strong></span>
+                                            
+                                            <%} %>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                        </form>
+                        
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -83,7 +113,14 @@
         $('#dataTables-example').DataTable({
             responsive: true
         });
+        setTimeout(function() {
+            $("#mensaje").toggle(2000);
+        },3000);
     });
+    
+    
+   
+    </script>
     </script>
 	
 </body>

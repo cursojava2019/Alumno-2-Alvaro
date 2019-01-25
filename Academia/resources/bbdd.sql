@@ -9,7 +9,7 @@ CREATE SEQUENCE public.profesores_id_seq;
 
 ALTER SEQUENCE public.profesores_id_seq
     OWNER TO postgres;
-
+    
 CREATE TABLE public.alumno
 (
     nombre character varying(100) COLLATE pg_catalog."default",
@@ -19,13 +19,12 @@ CREATE TABLE public.alumno
     telefono character varying(9) COLLATE pg_catalog."default",
     correo character varying(100) COLLATE pg_catalog."default",
     repetidor boolean NOT NULL,
-    fechaalta character varying(10) COLLATE pg_catalog."default",
-    fechabaja character varying(10) COLLATE pg_catalog."default",
     observaciones character varying(100) COLLATE pg_catalog."default",
     id bigint NOT NULL DEFAULT nextval('alumno_id_seq'::regclass),
+    fechaalta timestamp with time zone,
+    fechabaja timestamp with time zone,
     CONSTRAINT alumno_pkey PRIMARY KEY (id)
 );
-
 
 CREATE TABLE public.profesor
 (
@@ -37,8 +36,7 @@ CREATE TABLE public.profesor
     telefono character varying(9) COLLATE pg_catalog."default",
     correo character varying(100) COLLATE pg_catalog."default",
     titulacion character varying(100) COLLATE pg_catalog."default"
-)
-
+);
 
 
 
