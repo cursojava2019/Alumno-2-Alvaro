@@ -7,7 +7,7 @@
   4. Ejercicios JQuery (✓)
   5. Ejercicios Javascript (✓)
   
-**__1. Tecnologías Web__**
+**__2. Java EE**
   1. Proyecto Academia (en progreso)
   
 **__X. Complemento al curso__**
