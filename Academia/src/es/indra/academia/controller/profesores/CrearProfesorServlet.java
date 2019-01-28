@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.indra.academia.controller.alumnos.AlumnoForm;
-import es.indra.academia.model.service.AlumnoService;
 import es.indra.academia.model.service.ProfesorService;
 
 /**
@@ -45,22 +43,7 @@ public class CrearProfesorServlet extends HttpServlet {
 			throws ServletException, IOException {
 		ArrayList<String> errores = new ArrayList<String>();
 
-		String nif = request.getParameter("nif");
-		String nombre = request.getParameter("nombre");
-		String apellido1 = request.getParameter("apellido1");
-		String apellido2 = request.getParameter("apellido2");
-		String telefono = request.getParameter("telefono");
-		String correo = request.getParameter("email");
-		String titulacion = request.getParameter("titulacion");
-
-		ProfesorForm profesor = new ProfesorForm();
-		profesor.setCorreo(correo);
-		profesor.setApellido2(apellido2);
-		profesor.setApellido1(apellido1);
-		profesor.setNif(nif);
-		profesor.setNombre(nombre);
-		profesor.setTelefono(telefono);
-		profesor.setTitulacion(titulacion);
+		ProfesorForm profesor = ProfesorForm.obtenerProfesorForm(request);
 
 		profesor.validar(errores);
 		if (errores.size() > 0) {

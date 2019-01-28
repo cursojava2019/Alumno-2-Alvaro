@@ -9,13 +9,34 @@
 		listado=new ArrayList<Profesor>();
 	}
 	String patronBusqueda= request.getParameter("patron");
-  if (patronBusqueda==null) patronBusqueda="";  
+  if (patronBusqueda==null) patronBusqueda="";
+  
+  String mensaje= request.getParameter("mensaje");
+  Boolean mensajeOK=false;
+  Boolean mensajeError=false;
+  if (mensaje!=null) {
+  		if (mensaje.equalsIgnoreCase("correcto")) {
+  			mensajeOK=true;
+  		}
+  		if (mensaje.equalsIgnoreCase("errorId")) {
+  			mensajeError=true;
+  		}
+  }
 %>    
     
 <!DOCTYPE html>
 <html>
 <%@include file="../plantilla/head.jsp" %>
 <body>
+<script>
+	function confirmarEliminacion(id){
+		if (confirm("¿Está seguro que desea eliminar este profesor?")){
+			location.href='<%=request.getContextPath()%>/admin/profesores/eliminar.html?id='+id;
+		}
+		
+		
+	}
+	</script>
 
     <div id="wrapper">
 
@@ -85,7 +106,7 @@
                                         <td><%=profesor.getApellido1()%> <%=profesor.getApellido2()%></td>
                                         <td><%=profesor.getNif()%></td>
                                         <td ><%=profesor.getTelefono()%></td>
-                                        <td ><a href="<%=profesor.getId()%>">Modificar</a> <a href="<%=profesor.getId()%>">Eliminar</a></td>
+                                        <td ><a href="<%=request.getContextPath()%>/admin/profesores/modificar.html?id=<%=profesor.getId()%>">Modificar</a> <a href="#" onclick="confirmarEliminacion(<%=profesor.getId()%>)">Eliminar</a></td>
                                     </tr>
                                 <% } %>   
                                 </tbody>
