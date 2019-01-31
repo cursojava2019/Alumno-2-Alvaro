@@ -3,26 +3,17 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	List<Profesor> listado=(List<Profesor>)request.getAttribute("listado");
-	if (listado==null){
-		listado=new ArrayList<Profesor>();
-	}
-	String patronBusqueda= request.getParameter("patron");
-  if (patronBusqueda==null) patronBusqueda="";
-  
-  String mensaje= request.getParameter("mensaje");
-  Boolean mensajeOK=false;
-  Boolean mensajeError=false;
-  if (mensaje!=null) {
-  		if (mensaje.equalsIgnoreCase("correcto")) {
-  			mensajeOK=true;
-  		}
-  		if (mensaje.equalsIgnoreCase("errorId")) {
-  			mensajeError=true;
-  		}
-  }
-%>    
+%>
+
+<c:if test="${param.mensaje eq 'correcto'}">
+ <c:set var="mensajeOK" value="true" ></c:set>
+</c:if>
+
+<c:if test="${param.mensaje=='errorId'}">
+ <c:set var="mensajeError" value="true" ></c:set>
+</c:if>
     
 <!DOCTYPE html>
 <html>
@@ -53,11 +44,16 @@
             <div class="row">
             <div class="col-lg-12">
             	<div class="panel panel-default">
-                        <%if (request.getParameter("mensaje")!=null){ %>
-                        <div class="alert alert-success" id="mensaje">
+                        <c:if test="${mensajeOK}">
+                             <div class="alert alert-success" id="mensaje">
                                Operación realizada correctamente
                             </div>
-                            <%} %>
+                        </c:if>
+                            <c:if test="${mensajeError}">
+                        <div class="alert alert-danger" id="mensaje">
+                               Id no encontrado. No es posible realizar la operación.
+                            </div>
+                            </c:if>
                         <div class="panel-heading">
                             Listado de Profesores
                         </div>
@@ -70,15 +66,16 @@
                         <div style="float:right;">  <button class="btn btn-default"  onclick="location.href='<%=request.getContextPath()%>/admin/profesores/nuevo.html';" type="button"><i class="fa fa-user"> Nuevo Usuario</i>
                                                 </button></div>
                         <div class="col-6">
-                                            <input class="" name="patron" type="text" value="<%=patronBusqueda%>">
+                                            <input class="" name="patron" type="text" value="${param.patron}">
                                             <span class="">
                                                 <button class="btn btn-default" type="submit"><i class="fa fa-search"></i>
                                                 </button>
                                             </span>
-                                            <%if (!patronBusqueda.equals("")) { %>
-                                            <span>Busqueda filtrada por <strong><%=patronBusqueda %> </strong></span>
+                                            <c:if test="${not empty param.patron}">
                                             
-                                            <%} %>
+                                            <span>Busqueda filtrada por <strong>${param.patron} </strong></span>
+                                            
+                                           </c:if>
                                             </div>
                                         </div>
                                         
@@ -98,17 +95,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <% for(int i=0; i<listado.size();i++) {
-                                	Profesor profesor = listado.get(i);
-                                %>
+                                <c:forEach var="profesor" items="${listado}"> 
+                               
                                     <tr class="odd gradeX">
-                                        <td><%=profesor.getNombre()%></td>
-                                        <td><%=profesor.getApellido1()%> <%=profesor.getApellido2()%></td>
-                                        <td><%=profesor.getNif()%></td>
-                                        <td ><%=profesor.getTelefono()%></td>
-                                        <td ><a href="<%=request.getContextPath()%>/admin/profesores/modificar.html?id=<%=profesor.getId()%>">Modificar</a> <a href="#" onclick="confirmarEliminacion(<%=profesor.getId()%>)">Eliminar</a></td>
+                                        <td>${profesor.nombre}</td>
+                                        <td>${profesor.apellido1} ${profesor.apellido2}</td>
+                                        <td>${profesor.nif}</td>
+                                        <td>${profesor.telefono}</td>
+                                        <td ><a href="${ruta}/admin/profesores/modificar.html?id=${profesor.id}">Modificar</a> <a href="#" onclick="confirmarEliminacion(${profesor.id})">Eliminar</a></td>
                                     </tr>
-                                <% } %>   
+                              </c:forEach>
                                 </tbody>
                             </table>
                             
