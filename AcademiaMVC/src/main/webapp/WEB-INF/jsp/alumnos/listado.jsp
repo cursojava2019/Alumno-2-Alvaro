@@ -29,7 +29,7 @@
 	<script>
 	function confirmarEliminacion(id){
 		if (confirm("¿Está seguro que desea eliminar este alumno?")){
-			location.href='${ruta}academiamvc/admin/alumnos/eliminar.html?id='+id;
+			location.href='<%=request.getContextPath()%>/admin/alumnos/eliminar.html?id='+id;
 		}
 		
 		
@@ -145,6 +145,7 @@
     
     
    
+    </script>
     </script>
 	
 </body>
