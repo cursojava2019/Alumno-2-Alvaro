@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import es.indra.academia.controller.alumnos.AlumnoForm;
 import es.indra.academia.model.entities.Profesor;
 import es.indra.academia.model.service.ProfesorService;
 
@@ -17,7 +18,7 @@ public class ProfesorFormValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return ProfesorForm.class.equals(clazz);
+		return AlumnoForm.class.equals(clazz);
 	}
 
 	@Override

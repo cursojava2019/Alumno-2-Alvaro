@@ -48,7 +48,7 @@ public class ProfesorController {
 		ArrayList<String> errores = new ArrayList<String>();
 		this.validador.validate(form, result);
 		if (result.hasErrors()) {
-			return "profesor/nuevo";
+			return "profesores/nuevo";
 
 		} else {
 
@@ -68,11 +68,11 @@ public class ProfesorController {
 			Profesor profesor = this.profesorService.find(id);
 			if (profesor != null) {
 				ProfesorForm form = new ProfesorForm(profesor);
-				model.addAttribute("formulario", form);
-				return "profesor/modificar";
+				model.addAttribute("profesor", form);
+				return "profesores/modificar";
 
 			} else {
-				return "redirect:/admin/profesor/listado.html?mensaje=errorId";
+				return "redirect:/admin/profesores/listado.html?mensaje=errorId";
 			}
 
 		}
@@ -80,20 +80,16 @@ public class ProfesorController {
 	}
 
 	@RequestMapping(value = "/modificar.html", method = RequestMethod.POST)
-	public String modificarPost(@ModelAttribute("formulario") ProfesorForm profesor, Model model) {
-		ArrayList<String> errores = new ArrayList<String>();
+	public String modificarPost(@Valid @ModelAttribute("profesor") ProfesorForm form, BindingResult result) {
+		this.validador.validate(form, result);
+		if (result.hasErrors()) {
+			return "profesores/modificar";
 
-		// alumno.validar(errores);
-		if (errores.size() > 0) {
-
-			model.addAttribute("errores", errores);
-
-			return "profesor/modificar";
 		} else {
 
-			this.profesorService.update(profesor.obtenerProfesor());
-
+			this.profesorService.create(form.obtenerProfesor());
 			return "redirect:/admin/profesores/listado.html?mensaje=correcto";
+
 		}
 
 	}

@@ -68,7 +68,7 @@ public class AlumnoController {
 			Alumno alumno = this.alumnoService.find(id);
 			if (alumno != null) {
 				AlumnoForm form = new AlumnoForm(alumno);
-				model.addAttribute("formulario", form);
+				model.addAttribute("alumno", form);
 				return "alumnos/modificar";
 
 			} else {
@@ -80,22 +80,17 @@ public class AlumnoController {
 	}
 
 	@RequestMapping(value = "/modificar.html", method = RequestMethod.POST)
-	public String modificarPost(@ModelAttribute("formulario") AlumnoForm alumno, Model model) {
-		ArrayList<String> errores = new ArrayList<String>();
+	public String modificarPost(@Valid @ModelAttribute("alumno") AlumnoForm form, BindingResult result) {
 
-		// alumno.validar(errores);
-		if (errores.size() > 0) {
-
-			model.addAttribute("errores", errores);
-
+		this.validador.validate(form, result);
+		if (result.hasErrors()) {
 			return "alumnos/modificar";
+
 		} else {
 
-			this.alumnoService.update(alumno.obtenerAlumno());
-
+			this.alumnoService.update(form.obtenerAlumno());
 			return "redirect:/admin/alumnos/listado.html?mensaje=correcto";
 		}
-
 	}
 
 	@RequestMapping(value = "/eliminar.html", method = RequestMethod.GET)

@@ -1,15 +1,11 @@
 package es.indra.academia.controller.profesores;
 
-import java.util.Date;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-import es.indra.academia.model.entities.Alumno;
 import es.indra.academia.model.entities.Profesor;
 
 public class ProfesorForm {
@@ -31,9 +27,7 @@ public class ProfesorForm {
 	@Email
 	@NotEmpty
 	private String correo;
-	@NotNull
-	@NotEmpty
-	@Size(min = 3, max = 100)
+	@Size(min = 0, max = 500)
 	private String titulacion;
 
 	public ProfesorForm() {
@@ -47,29 +41,30 @@ public class ProfesorForm {
 		this.titulacion = "";
 	}
 
-	public ProfesorForm(Profesor p) {
+	public ProfesorForm(Profesor a) {
 		super();
-		this.id = p.getId();
-		this.nif = (p.getNif());
-		this.nombre = (p.getNombre());
-		this.apellido1 = (p.getApellido1());
-		this.apellido2 = (p.getApellido2());
-		this.telefono = (p.getTelefono());
-		this.correo = (p.getCorreo());
-		this.titulacion = (p.getTitulacion());
+		this.id = a.getId();
+		this.nif = (a.getNif());
+		this.nombre = (a.getNombre());
+		this.apellido1 = (a.getApellido1());
+		this.apellido2 = (a.getApellido2());
+		this.telefono = (a.getTelefono());
+		this.correo = (a.getCorreo());
+		this.titulacion = (a.getTitulacion());
 	}
 
 	public Profesor obtenerProfesor() {
-		Profesor p = new Profesor();
-		p.setId(getId());
-		p.setNif(getNif());
-		p.setNombre(getNombre());
-		p.setApellido1(getApellido1());
-		p.setApellido2(getApellido2());
-		p.setTelefono(getTelefono());
-		p.setCorreo(getCorreo());
-		p.setTitulacion(getTitulacion());
-		return p;
+		Profesor a = new Profesor();
+		a.setId(getId());
+		a.setNif(getNif());
+		a.setNombre(getNombre());
+		a.setApellido1(getApellido1());
+		a.setApellido2(getApellido2());
+		a.setTelefono(getTelefono());
+		a.setCorreo(getCorreo());
+		a.setTitulacion(getTitulacion());
+
+		return a;
 	}
 
 	public Long getId() {

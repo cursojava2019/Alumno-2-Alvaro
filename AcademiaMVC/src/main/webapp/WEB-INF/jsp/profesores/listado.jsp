@@ -4,41 +4,25 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <%
- 
-  String texto="Texto muy guay";
-  session.setAttribute("texto", texto);
- 
- %>
-   
-    
-<c:if test="${param.mensaje eq 'correcto'}">
- <c:set var="mensajeOK" value="true" ></c:set>
-</c:if>
+<%
 
+%>
+<c:if test="${param.mensaje eq 'correcto'}">
+	<c:set var="mensajeOK" value="true" ></c:set>
+</c:if>
 <c:if test="${param.mensaje=='errorId'}">
  <c:set var="mensajeError" value="true" ></c:set>
 </c:if>
+    
 <!DOCTYPE html>
 <html>
 <c:import url="../plantilla/head.jsp"></c:import>
-
 <body>
-
-<c:out  value=""></c:out>
-	<script>
-	function confirmarEliminacion(id){
-		if (confirm("¿Está seguro que desea eliminar este profesor?")){
-			location.href='<%=request.getContextPath()%>/admin/profesores/eliminar.html?id='+id;
-		}
-		
-		
-	}
-	</script>
+	<c:out  value=""></c:out>
     <div id="wrapper">
 
         <!-- Navigation -->
-        <%@include file="../plantilla/cabecera.jsp" %>
+        <c:import url="../plantilla/cabecera.jsp"></c:import>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -55,11 +39,11 @@
                                Operación realizada correctamente
                             </div>
                         </c:if>
-                            <c:if test="${mensajeError}">
-                        <div class="alert alert-danger" id="mensaje">
+                        <c:if test="${mensajeError}">
+                        	<div class="alert alert-danger" id="mensaje">
                                Id no encontrado. No es posible realizar la operación.
                             </div>
-                            </c:if>
+                        </c:if>
                             
                             
                         <div class="panel-heading">
@@ -80,9 +64,7 @@
                                                 </button>
                                             </span>
                                             <c:if test="${not empty param.patron}">
-                                            
-                                            <span>Busqueda filtrada por <strong>${param.patron} </strong></span>
-                                            
+                                            	<span>Busqueda filtrada por <strong>${param.patron} </strong></span>
                                            </c:if>
                                             </div>
                                         </div>
@@ -103,6 +85,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                
                                 <c:forEach var="profesor" items="${listado}"> 
                                
                                     <tr class="odd gradeX">
@@ -110,9 +93,9 @@
                                         <td>${profesor.apellido1} ${profesor.apellido2}</td>
                                         <td>${profesor.nif}</td>
                                         <td>${profesor.telefono}</td>
-                                        <td ><a href="${ruta}/admin/profesor/modificar.html?id=${profesor.id}">Modificar</a> <a href="#" onclick="confirmarEliminacion(${profesor.id})">Eliminar</a></td>
+                                        <td ><a href="${ruta}/admin/profesores/modificar.html?id=${profesor.id}">Modificar</a> <a href="#" onclick="confirmarEliminacion(${profesor.id})">Eliminar</a></td>
                                     </tr>
-                              </c:forEach>   
+                              </c:forEach> 
                                 </tbody>
                             </table>
                             
@@ -146,7 +129,13 @@
     
    
     </script>
-    </script>
+	<script>
+	function confirmarEliminacion(id){
+		if (confirm("¿Está seguro que desea eliminar este profesor?")){
+			location.href='${ruta}/admin/profesores/eliminar.html?id='+id;
+		}
+	}
+	</script>
 	
 </body>
 </html>

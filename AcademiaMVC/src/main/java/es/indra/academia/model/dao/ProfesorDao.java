@@ -6,25 +6,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import es.indra.academia.configuration.Configuracion;
-import es.indra.academia.model.entities.Alumno;
 import es.indra.academia.model.entities.Profesor;
 import es.indra.academia.model.support.Dao;
 import es.indra.academia.model.support.DaoException;
 
+@Repository
 public class ProfesorDao implements Dao<Long, Profesor> {
-	
+
 	private static final String CAMPOS = "nif,nombre,apellido1,apellido2,telefono,correo,titulacion";
 
 	@Override
 	public void create(Profesor entity) throws DaoException {
 		try {
 			Connection co = Configuracion.getInstance().obtenerConexionBD();
-			PreparedStatement p = co
-					.prepareStatement("INSERT INTO PROFESOR(" + CAMPOS + ") VALUES (?,?,?,?,?,?,?) ");
+			PreparedStatement p = co.prepareStatement("INSERT INTO PROFESOR(" + CAMPOS + ") VALUES (?,?,?,?,?,?,?) ");
 
 			p.setString(1, entity.getNif());
 			p.setString(2, entity.getNombre());
@@ -33,6 +33,7 @@ public class ProfesorDao implements Dao<Long, Profesor> {
 			p.setString(5, entity.getTelefono());
 			p.setString(6, entity.getCorreo());
 			p.setString(7, entity.getTitulacion());
+
 			p.executeUpdate();
 			co.close();
 		} catch (SQLException e) {
@@ -40,17 +41,17 @@ public class ProfesorDao implements Dao<Long, Profesor> {
 			System.out.println("Error creando objeto en BBDD");
 			throw new DaoException();
 		}
-		
+
 	}
 
 	@Override
 	public void update(Profesor entity) throws DaoException {
 		try {
 			Connection co = Configuracion.getInstance().obtenerConexionBD();
-			PreparedStatement p = co.prepareStatement("UPDATE ALUMNO" + "SET nif=?," + "nombre=?," + "apellido1=?,"
-					+ "apellido2=?," + "telefono=?," + "correo=?," + "titulacion=?, WHERE id=?;");
+			PreparedStatement p = co.prepareStatement("UPDATE PROFESOR " + "SET nif=?," + "nombre=?," + "apellido1=?,"
+					+ "apellido2=?," + "telefono=?," + "correo=?," + "titulacion=?  WHERE id=?;");
 
-			p.setLong(11, entity.getId());
+			p.setLong(8, entity.getId());
 			p.setString(1, entity.getNif());
 			p.setString(2, entity.getNombre());
 			p.setString(3, entity.getApellido1());
@@ -58,6 +59,7 @@ public class ProfesorDao implements Dao<Long, Profesor> {
 			p.setString(5, entity.getTelefono());
 			p.setString(6, entity.getCorreo());
 			p.setString(7, entity.getTitulacion());
+
 			p.executeUpdate();
 			co.close();
 		} catch (SQLException e) {
@@ -65,7 +67,6 @@ public class ProfesorDao implements Dao<Long, Profesor> {
 			e.printStackTrace();
 			throw new DaoException();
 		}
-		
 	}
 
 	@Override
@@ -82,7 +83,6 @@ public class ProfesorDao implements Dao<Long, Profesor> {
 			e.printStackTrace();
 			throw new DaoException();
 		}
-		
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class ProfesorDao implements Dao<Long, Profesor> {
 			co.close();
 			return profesor;
 		} catch (SQLException e) {
-			System.out.println("Error creando objeto en BBDD");
+			System.out.println("Error listando objeto en BBDD");
 			e.printStackTrace();
 			throw new DaoException();
 		}
@@ -129,12 +129,12 @@ public class ProfesorDao implements Dao<Long, Profesor> {
 			co.close();
 			return listado;
 		} catch (Exception e) {
-			System.out.println("Error creando objeto en BBDD");
+			System.out.println("Error listando los objetos en BBDD");
 			e.printStackTrace();
 			throw new DaoException();
 		}
 	}
-	
+
 	private Profesor obtenerProfesor(ResultSet resultado) throws SQLException {
 
 		Long id = resultado.getLong(1);
@@ -158,8 +158,8 @@ public class ProfesorDao implements Dao<Long, Profesor> {
 
 		return profesor;
 	}
-	
-	public List<Profesor> findProfesores(String patron) throws DaoException {
+
+	public List<Profesor> findProfesor(String patron) throws DaoException {
 
 		try {
 			Connection co = Configuracion.getInstance().obtenerConexionBD();
@@ -175,6 +175,7 @@ public class ProfesorDao implements Dao<Long, Profesor> {
 			while (resultados.next()) {
 
 				Profesor profesor = obtenerProfesor(resultados);
+
 				listado.add(profesor);
 			}
 
@@ -186,7 +187,7 @@ public class ProfesorDao implements Dao<Long, Profesor> {
 			throw new DaoException();
 		}
 	}
-	
+
 	public List<Profesor> buscarNif(String nif) throws DaoException {
 
 		Profesor profesor = null;
