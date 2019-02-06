@@ -26,6 +26,15 @@
 <body>
 
 <c:out  value=""></c:out>
+	<script>
+	function confirmarEliminacion(id){
+		if (confirm("¿Está seguro que desea eliminar este alumno?")){
+			location.href='<%=request.getContextPath()%>/admin/alumnos/eliminar.html?id='+id;
+		}
+		
+		
+	}
+	</script>
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -137,13 +146,7 @@
     
    
     </script>
-    <script>
-	function confirmarEliminacion(id){
-		if (confirm("¿Está seguro que desea eliminar este alumno?")){
-			location.href='${ruta}/admin/alumnos/eliminar.html?id='+id;
-		}
-	}
-	</script>
+    </script>
 	
 </body>
 </html>

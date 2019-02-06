@@ -6,16 +6,18 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 
+
 <html>
-<c:import url="../plantilla/head.jsp"></c:import>
+<%@include file="../plantilla/head.jsp" %>
 <body>
 
     <div id="wrapper">
 
         <!-- Navigation -->
-        <c:import url="../plantilla/cabecera.jsp"></c:import>
+        <%@include file="../plantilla/cabecera.jsp" %>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -34,9 +36,10 @@
                         
                             <div class="row">
                                 <div class="col-lg-6">
-								<form:form action="./modificar.html" method="post" modelAttribute="profesor" >
-                                <form:hidden path="id" />
-                                    	
+                                                          			 
+                           			<form:form action="./modificar.html" method="post" modelAttribute="formulario" >
+                                    	<form:hidden path="id" />
+                                       
                                         <div class="form-group">
                                             <label>NIF</label>
                                            <form:input path="nif" class="form-control"/>
@@ -46,42 +49,39 @@
                                         <div class="form-group">
                                             <label>Nombre</label>
                                              <form:input path="nombre" class="form-control"/>
-                                             <form:errors path="nombre" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Primer Apellido </label>
                                             <form:input path="apellido1" class="form-control"/>
-                                            <form:errors path="apellido1" element="div" cssClass="alert alert-danger"/>
+                                            
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Segundo Apellido</label>
                                              <form:input path="apellido2" class="form-control"/>
-                                            <form:errors path="apellido2" element="div" cssClass="alert alert-danger"/>
+                                            
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Telefono</label>
                                              <form:input path="telefono" class="form-control"/>
-                                            <form:errors path="telefono" element="div" cssClass="alert alert-danger"/>
+                                            
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Correo</label>
                                              <form:input path="correo" class="form-control"/>
-                                             <form:errors path="correo" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Titulacion</label>
-                                             <form:input path="titulacion" class="form-control"/>
-                                             <form:errors path="titulacion" element="div" cssClass="alert alert-danger"/>
+                                            <form:input path="titulacion" class="form-control"/>
                                             <p class="help-block"></p>
                                         </div>
-                                      
                                         <button type="submit" class="btn btn-default">Enviar</button>
                                         <button type="reset" class="btn btn-default">Limpiar</button>
+                                   
                                     </form:form>
                                 </div>
                                
@@ -104,7 +104,8 @@
 
     </div>
     <!-- /#wrapper -->
-	<c:import url="../plantilla/javascriptPie.jsp"></c:import>
+
+   <%@include file="../plantilla/javascriptPie.jsp" %>
 
 </body>
 </html>

@@ -44,7 +44,7 @@ public class ProfesorController {
 	}
 
 	@RequestMapping(value = "/nuevo.html", method = RequestMethod.POST)
-	public String nuevoPost(@Valid @ModelAttribute("profesor") ProfesorForm form, BindingResult result) {
+	public String nuevoPost(@Valid @ModelAttribute("profesores") ProfesorForm form, BindingResult result) {
 		ArrayList<String> errores = new ArrayList<String>();
 		this.validador.validate(form, result);
 		if (result.hasErrors()) {
@@ -68,7 +68,7 @@ public class ProfesorController {
 			Profesor profesor = this.profesorService.find(id);
 			if (profesor != null) {
 				ProfesorForm form = new ProfesorForm(profesor);
-				model.addAttribute("profesor", form);
+				model.addAttribute("formulario", form);
 				return "profesores/modificar";
 
 			} else {
@@ -80,16 +80,20 @@ public class ProfesorController {
 	}
 
 	@RequestMapping(value = "/modificar.html", method = RequestMethod.POST)
-	public String modificarPost(@Valid @ModelAttribute("profesor") ProfesorForm form, BindingResult result) {
-		this.validador.validate(form, result);
-		if (result.hasErrors()) {
-			return "profesores/modificar";
+	public String modificarPost(@ModelAttribute("formulario") ProfesorForm profesor, Model model) {
+		ArrayList<String> errores = new ArrayList<String>();
 
+		// profesor.validar(errores);
+		if (errores.size() > 0) {
+
+			model.addAttribute("errores", errores);
+
+			return "profesores/modificar";
 		} else {
 
-			this.profesorService.create(form.obtenerProfesor());
-			return "redirect:/admin/profesores/listado.html?mensaje=correcto";
+			this.profesorService.update(profesor.obtenerProfesor());
 
+			return "redirect:/admin/profesores/listado.html?mensaje=correcto";
 		}
 
 	}
