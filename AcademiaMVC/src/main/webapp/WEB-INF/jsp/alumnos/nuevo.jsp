@@ -1,22 +1,10 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="es.indra.academia.controller.alumnos.AlumnoForm"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" 	prefix="form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<html>
-<%@include file="../plantilla/head.jsp" %>
-<body>
-
-    <div id="wrapper">
-
-        <!-- Navigation -->
-        <%@include file="../plantilla/cabecera.jsp" %>
-        <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Nuevo Alumno</h1>
@@ -37,7 +25,7 @@
                                 
                                     	<form:form action="./nuevo.html" method="post" modelAttribute="alumno" >
                                     	<form:hidden path="id" />
-                                       	<spring:hasBindErrors name="*"> HAY ERRORRES QUE RESOLVER</spring:hasBindErrors>
+                                       
                                         <div class="form-group">
                                             <label>NIF</label>
                                            <form:input path="nif" class="form-control"/>
@@ -45,31 +33,31 @@
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="alumno.nombre"/></label>
+                                            <label><spring:message code="alumno.nombre"/>Nombre</label>
                                              <form:input path="nombre" class="form-control"/>
                                              <form:errors path="nombre" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="alumno.apellido1"/> </label>
+                                            <label><spring:message code="alumno.apellido1"/>Primer apellido</label>
                                             <form:input path="apellido1" class="form-control"/>
                                             <form:errors path="apellido1" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="alumno.apellido2"/></label>
+                                            <label><spring:message code="alumno.apellido2"/>Segundo apellido</label>
                                              <form:input path="apellido2" class="form-control"/>
                                             <form:errors path="apellido2" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label>Telefono</label>
+                                            <label><spring:message code="alumno.telefono"/>Telefono</label>
                                              <form:input path="telefono" class="form-control"/>
                                             <form:errors path="telefono" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label>Correo</label>
+                                            <label><spring:message code="alumno.correo"/>Correo</label>
                                              <form:input path="correo" class="form-control"/>
                                              <form:errors path="correo" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
@@ -79,6 +67,7 @@
                                         </c:set> </c:if>
                                         <div class="form-group">
                                             <div class="checkbox">
+                                            <label>Repetidor</label>
                                                 <label>
                                                     <form:checkbox path="repetidor"/>
                                                     <form:errors path="repetidor" element="div" cssClass="alert alert-danger"/>
@@ -87,7 +76,7 @@
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label>Observaciones</label>
+                                            <label><spring:message code="alumno.observaciones"/>Observaciones</label>
                                             <form:textarea path="observaciones" rows="3"/>
                                             <form:errors path="observaciones" element="div" cssClass="alert alert-danger"/>
                                             
@@ -105,21 +94,5 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-            
             </div>
-            
-            
             </div>
-            
-            
-            
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-   <%@include file="../plantilla/javascriptPie.jsp" %>
-
-</body>
-</html>

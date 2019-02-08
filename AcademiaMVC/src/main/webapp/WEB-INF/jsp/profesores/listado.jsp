@@ -1,32 +1,34 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="es.indra.academia.model.entities.Profesor"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" 	prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-%>
+
+
 <c:if test="${param.mensaje eq 'correcto'}">
-	<c:set var="mensajeOK" value="true" ></c:set>
+ <c:set var="mensajeOK" value="true" ></c:set>
 </c:if>
+
 <c:if test="${param.mensaje=='errorId'}">
  <c:set var="mensajeError" value="true" ></c:set>
 </c:if>
-    
-<!DOCTYPE html>
-<html>
-<c:import url="../plantilla/head.jsp"></c:import>
-<body>
-	<c:out  value=""></c:out>
-    <div id="wrapper">
 
-        <!-- Navigation -->
-        <c:import url="../plantilla/cabecera.jsp"></c:import>
-        <div id="page-wrapper">
+	<script>
+	function confirmarEliminacion(id){
+		if (confirm("¿Está seguro que desea eliminar este profesor?")){
+			location.href='${ruta}/admin/profesores/eliminar.html?id='+id;
+		}
+		
+		
+	}
+	</script>
+   
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Profesores</h1>
+                    <h1 class="page-header">Profesor</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -39,15 +41,15 @@
                                Operación realizada correctamente
                             </div>
                         </c:if>
-                        <c:if test="${mensajeError}">
-                        	<div class="alert alert-danger" id="mensaje">
+                            <c:if test="${mensajeError}">
+                        <div class="alert alert-danger" id="mensaje">
                                Id no encontrado. No es posible realizar la operación.
                             </div>
-                        </c:if>
+                            </c:if>
                             
                             
                         <div class="panel-heading">
-                            Listado de Profesores
+                            Listado de Profesor
                         </div>
                         
                         <form name="buscador" action="./listado.html" method="post">
@@ -64,7 +66,9 @@
                                                 </button>
                                             </span>
                                             <c:if test="${not empty param.patron}">
-                                            	<span>Busqueda filtrada por <strong>${param.patron} </strong></span>
+                                            
+                                            <span>Busqueda filtrada por <strong>${param.patron} </strong></span>
+                                            
                                            </c:if>
                                             </div>
                                         </div>
@@ -85,7 +89,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                
                                 <c:forEach var="profesor" items="${listado}"> 
                                
                                     <tr class="odd gradeX">
@@ -95,7 +98,7 @@
                                         <td>${profesor.telefono}</td>
                                         <td ><a href="${ruta}/admin/profesores/modificar.html?id=${profesor.id}">Modificar</a> <a href="#" onclick="confirmarEliminacion(${profesor.id})">Eliminar</a></td>
                                     </tr>
-                              </c:forEach> 
+                              </c:forEach>   
                                 </tbody>
                             </table>
                             
@@ -109,13 +112,8 @@
             
             
             
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
-    <!-- /#wrapper -->
-
-   <%@include file="../plantilla/javascriptPie.jsp" %>
+        
+  
 	 <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
@@ -129,13 +127,5 @@
     
    
     </script>
-	<script>
-	function confirmarEliminacion(id){
-		if (confirm("¿Está seguro que desea eliminar este profesor?")){
-			location.href='${ruta}/admin/profesores/eliminar.html?id='+id;
-		}
-	}
-	</script>
+   
 	
-</body>
-</html>
