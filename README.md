@@ -7,7 +7,7 @@
   4. Ejercicios JQuery (✓)
   5. Ejercicios Javascript (✓)
   
-**__2. Java EE__** y **__3. Spring__**
+**__2. Java EE , 3. Spring y 4. JPA__**
   1. Proyecto Academia (en progreso)
   
 **__X. Complemento al curso__**
