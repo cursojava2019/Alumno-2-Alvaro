@@ -10,6 +10,9 @@
 **__2. Java EE , 3. Spring y 4. JPA__**
   1. Proyecto Academia (en progreso)
   
+**__5. Angular__**
+  1. Ejercicios Angular 1 (0/6)
+
 **__X. Complemento al curso__**
 
   1. Ejercicios Java Básico (✓)
