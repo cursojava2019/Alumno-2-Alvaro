@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'pruebaAngular';
+  title = 'Curso Java Angular';
+  miAtributo = 'Mi atributo interpolado';
 }

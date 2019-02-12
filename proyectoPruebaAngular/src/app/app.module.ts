@@ -1,18 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MiComponenteComponent } from './mi-componente/mi-componente.component';
+import { Micomponente2Component } from './micomponente2/micomponente2.component';
+import { GestorTareasComponent } from './gestor-tareas/gestor-tareas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MiComponenteComponent
+    MiComponenteComponent,
+    Micomponente2Component,
+    GestorTareasComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
