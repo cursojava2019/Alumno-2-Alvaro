@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { MiComponenteComponent } from './mi-componente/mi-componente.component';
 import { Micomponente2Component } from './micomponente2/micomponente2.component';
 import { GestorTareasComponent } from './gestor-tareas/gestor-tareas.component';
+import { TareaComponent } from './gestor-tareas/tarea/tarea.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MiComponenteComponent,
     Micomponente2Component,
-    GestorTareasComponent
+    GestorTareasComponent,
+    TareaComponent
   ],
   imports: [
     BrowserModule,

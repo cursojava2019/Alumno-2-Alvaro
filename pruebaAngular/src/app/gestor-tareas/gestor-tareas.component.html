@@ -3,22 +3,12 @@
 <div class="col-1"></div>
 <div class="col-6">
 <div style="height:300px;">
-<div  *ngIf="listado?.length > 0;else sinTareas">
-  <div *ngFor="let item of listado">
-
-    <input type="checkbox"[(ngModel)]="item.hecho" />
-
-    <span *ngIf="item.hecho; else notachado" class="tachado">{{item.nombre}}</span>
-
-    <ng-template #notachado>
-        <span style="font-size:1.5em"> {{item.nombre}}</span>
-    </ng-template>
-
-    <span [class.tachado]="item.hecho"> {{item.nombre}}</span>
-
-
+<div  *ngIf="listarTareas()?.length > 0;else sinTareas">
+<div style="text-align: left">
+  <div *ngFor="let item of listarTareas();let i=index">
+    <app-tarea [tarea]="item" [indice]="i" (eventoEliminacion)="eliminarTarea($event)" ></app-tarea>
   </div>
-
+</div>
 </div>
 <ng-template #sinTareas>
     <div >No hay tareas</div>
@@ -26,6 +16,6 @@
 <hr/>
 <input text [(ngModel)]="tareaEntrada"/>
 <button (click) ="crearTarea()">Añadir Tarea</button>
-{{listado}}
+{{listarTareas()}}
 </div>
 </div>
