@@ -1,0 +1,12 @@
+<h2>Ejercicio 4. Realizar un formulario donde se introduzca el nombre de usuario y la contraseña. El botón de enviar el usuario y la contraseña no debe aparecer hasta que ambos campos estén rellenos y
+  sean iguales. Si el texto es menor de 8 caracteres se debería mostrar un mensaje de error</h2>
+
+<p>Usuario: <input type="text" [(ngModel)]="nombre"/></p>
+<p>Contraseña: <input type="text" [(ngModel)]="contrasena"/></p>
+<div *ngIf="nombre.length<=8">
+    <p>El usuario debe tener al menos 8 caracteres</p>
+</div>
+<div *ngIf="contrasena.length<=8">
+    <p>La contraseña debe tener al menos 8 caracteres</p>
+</div>
+<button *ngIf="nombre == contrasena && nombre.length>=1 && contrasena.length>=1">Enviar</button>
