@@ -66,16 +66,16 @@
 	</definition>
 	
 <!-- 	Profesores -->
-	<definition name="alumnos/listado" extends=".mainTemplate">
+	<definition name="profesores/listado" extends=".mainTemplate">
 		<put-attribute name="title" value="Listado de Alumnos" type="string" />
 		<put-attribute name="content" value="/WEB-INF/jsp/profesores/listado.jsp" />
 	</definition>
-	<definition name="alumnos/nuevo" extends=".mainTemplate">
+	<definition name="profesores/nuevo" extends=".mainTemplate">
 		<put-attribute name="title" value="Crear Alumnos" type="string" />
 		<put-attribute name="content" value="/WEB-INF/jsp/profesores/nuevo.jsp" />
 		
 	</definition>
-	<definition name="alumnos/modificar" extends=".mainTemplate">
+	<definition name="profesores/modificar" extends=".mainTemplate">
 		<put-attribute name="title" value="Modificar Alumnos" type="string" />
 		<put-attribute name="content" value="/WEB-INF/jsp/profesores/modificar.jsp" />
 	</definition>
