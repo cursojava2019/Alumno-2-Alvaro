@@ -1,0 +1,31 @@
+<h2>Ejercicio 6: Implementar una app en angular que permita administrar un array de objetos con los siguientes elementos: el código, descripción y
+  precio de un artículo. Se debe poder agregar, borrar y modificar los datos de un artículo.</h2>
+
+  <div class="row">
+      <div class="col-1"></div>
+      <div class="col-6">
+      <div style="height:300px;">
+      <div *ngIf="listarProductos()?.length > 0;else sinProductos">
+      <div style="text-align: left">
+        <div *ngFor="let item of listarProductos();let i=index">
+          <table>
+            <tr>
+              <th>Código</th>
+              <th>Descripción</th>
+              <th>Precio</th>
+              <th>Borrar</th>
+              <th>Seleccionar</th>
+            </tr>
+            <app-productos></app-productos>
+          </table>
+        </div>
+      </div>
+      </div>
+      <ng-template #sinArticulos>
+          <div >No hay artículos</div>
+      </ng-template>
+      <hr/>
+      <button (click) ="crearProducto()">Agregar</button>
+
+      </div>
+      </div>
