@@ -5,9 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" 	prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-
-
-
+    
 <c:if test="${param.mensaje eq 'correcto'}">
  <c:set var="mensajeOK" value="true" ></c:set>
 </c:if>
@@ -16,16 +14,6 @@
  <c:set var="mensajeError" value="true" ></c:set>
 </c:if>
 
-	<script>
-	function confirmarEliminacion(id){
-		if (confirm("¿Está seguro que desea eliminar este alumno?")){
-			location.href='${ruta}/admin/alumnos/eliminar.html?id='+id;
-		}
-		
-		
-	}
-	</script>
-   
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Alumnos</h1>
@@ -52,14 +40,13 @@
                             Listado de Alumnos
                         </div>
                         
-                        <!--<form name="buscador" action="./listado.html" method="post">-->
-                        <form name="buscador" action="./busqueda.html" method="post">
-                        <div class="">
+                        <form name="buscador" action="./listado.html" method="post">
                         <div class="col-6">
                         <label>Buscar Alumno</label>
                         </div>
-                        <div style="float:right;">  <button class="btn btn-default"  onclick="location.href='<%=request.getContextPath()%>/admin/alumnos/nuevo.html';" type="button"><i class="fa fa-user"> Nuevo Usuario</i>
-                                                </button></div>
+                        <div style="float:right;">  
+                        	<button class="btn btn-default"  onclick="location.href='<%=request.getContextPath()%>/admin/alumnos/nuevo.html';" type="button"><i class="fa fa-user"> Nuevo Alumno</i></button>
+                        </div>
                         <div class="col-6">
                                             <input class="" name="patron" type="text" value="${param.patron}">
                                             <span class="">
@@ -72,7 +59,7 @@
                                             
                                            </c:if>
                                             </div>
-                                        </div>
+                         </div>
                                         
                                         
                         </form>
@@ -110,15 +97,11 @@
             
             
             </div>
-            
-            
-            
-        
-  
 	 <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
-            responsive: true
+            responsive: true,
+            "searching": false
         });
         setTimeout(function() {
             $("#mensaje").toggle(2000);
@@ -128,5 +111,10 @@
     
    
     </script>
-   
-	
+    <script>
+	function confirmarEliminacion(id){
+		if (confirm("¿Está seguro que desea eliminar este alumno?")){
+			location.href='${ruta}/admin/alumnos/eliminar.html?id='+id;
+		}
+	}
+	</script>

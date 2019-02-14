@@ -1,71 +1,69 @@
 package es.indra.academia.model.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.PastOrPresent;
 
 /**
  * The persistent class for the alumno database table.
- * 
+ *
  */
 @Entity
-@Table(name="alumno")
-@NamedQuery(name="Alumno.findAll", query="SELECT a FROM Alumno a")
+@NamedQuery(name = "Alumno.findAll", query = "SELECT a FROM Alumno a")
 public class Alumno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length=100)
 	private String apellido1;
 
-	@Column(length=100)
 	private String apellido2;
 
-	@Column(length=100)
 	private String correo;
 
-	private Timestamp fechaalta;
+	@Temporal(TemporalType.TIMESTAMP)
+	private @PastOrPresent Date fechaAlta;
 
-	private Timestamp fechabaja;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechaBaja;
 
-	@Column(length=9)
 	private String nif;
 
-	@Column(length=100)
 	private String nombre;
 
-	@Column(length=100)
 	private String observaciones;
 
-	@Column(nullable=false)
 	private Boolean repetidor;
 
-	@Column(length=9)
 	private String telefono;
 
-	//bi-directional many-to-one association to ResponsableAlumno
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name="responsable")
-	private ResponsableAlumno responsable;
-
-	//bi-directional many-to-many association to Clase
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(
-		name="alumno_clase"
-		, joinColumns={
-			@JoinColumn(name="id_alumno", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_clase", nullable=false)
-			}
-		)
+	// bi-directional many-to-many association to Clase
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "alumno_clase", joinColumns = { @JoinColumn(name = "id_alumno") }, inverseJoinColumns = {
+			@JoinColumn(name = "id_clase") })
 	private List<Clase> clases;
+
+	// bi-directional many-to-one association to ResponsableAlumno
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "responsable")
+	private ResponsableAlumno responsable;
 
 	public Alumno() {
 	}
@@ -102,20 +100,20 @@ public class Alumno implements Serializable {
 		this.correo = correo;
 	}
 
-	public Timestamp getFechaalta() {
-		return this.fechaalta;
+	public @PastOrPresent Date getFechaAlta() {
+		return this.fechaAlta;
 	}
 
-	public void setFechaalta(Timestamp fechaalta) {
-		this.fechaalta = fechaalta;
+	public void setFechaAlta(@PastOrPresent Date date) {
+		this.fechaAlta = date;
 	}
 
-	public Timestamp getFechabaja() {
-		return this.fechabaja;
+	public Date getFechaBaja() {
+		return this.fechaBaja;
 	}
 
-	public void setFechabaja(Timestamp fechabaja) {
-		this.fechabaja = fechabaja;
+	public void setFechaBaja(Date fechaBaja) {
+		this.fechaBaja = fechaBaja;
 	}
 
 	public String getNif() {
@@ -158,20 +156,20 @@ public class Alumno implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public ResponsableAlumno getResponsable() {
-		return this.responsable;
-	}
-
-	public void setResponsable(ResponsableAlumno responsable) {
-		this.responsable = responsable;
-	}
-
 	public List<Clase> getClases() {
 		return this.clases;
 	}
 
 	public void setClases(List<Clase> clases) {
 		this.clases = clases;
+	}
+
+	public ResponsableAlumno getResponsable() {
+		return this.responsable;
+	}
+
+	public void setResponsable(ResponsableAlumno responsable) {
+		this.responsable = responsable;
 	}
 
 }

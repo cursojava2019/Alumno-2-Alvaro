@@ -17,25 +17,18 @@ public class ResponsableAlumno implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
 	private Long id;
 
-	@Column(length=100)
 	private String apellido1;
 
-	@Column(length=100)
 	private String apellido2;
 
-	@Column(length=100)
 	private String correo;
 
-	@Column(length=9)
 	private String nif;
 
-	@Column(length=100)
 	private String nombre;
 
-	@Column(length=20)
 	private String telefono;
 
 	//bi-directional many-to-one association to Alumno

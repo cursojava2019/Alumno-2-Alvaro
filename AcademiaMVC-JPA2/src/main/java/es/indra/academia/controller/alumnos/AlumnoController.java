@@ -41,25 +41,22 @@ public class AlumnoController {
 		model.addAttribute("listado", listado);
 		return "alumnos/listado";
 	}
-	
-	@RequestMapping(value = "/busqueda.html", method = RequestMethod.POST)
-	public String listado(Model model, String patron) {
-		MyUserDetails user = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String name = user.getUsername(); // get logged in username
 
-		this.log.info("listado Alumnos");
-		if (patron != null && !patron.equals("")) {
-		    List<Alumno> listado = this.alumnoService.findAlumnosPatron(patron);	
-		    model.addAttribute("listado", listado);
-		} else {
-			
-			List<Alumno> listado = this.alumnoService.findAll();
-			model.addAttribute("listado", listado);
-	
-		}
-		
-		return "alumnos/listado";
-	}
+	/*
+	 * @RequestMapping(value = "/listado.html", method = RequestMethod.GET) public
+	 * String listado(@RequestParam("patron") String patron, Model model) {
+	 * MyUserDetails user = (MyUserDetails)
+	 * SecurityContextHolder.getContext().getAuthentication().getPrincipal(); String
+	 * name = user.getUsername(); // get logged in username
+	 * 
+	 * List<Alumno> listado = null; if (patron != null && !patron.equals("")) {
+	 * listado = this.alumnoService.findAlumnosPatron(patron); } else { listado =
+	 * this.alumnoService.findAll(); }
+	 * 
+	 * this.log.info("listado Alumnos"); model.addAttribute("listado", listado);
+	 * return "alumnos/listado"; }
+	 *
+	 */
 
 	@RequestMapping(value = "/nuevo.html", method = RequestMethod.GET)
 	public String nuevo(Model model) {
@@ -92,7 +89,7 @@ public class AlumnoController {
 			Alumno alumno = this.alumnoService.find(id);
 			if (alumno != null) {
 				AlumnoForm form = new AlumnoForm(alumno);
-				model.addAttribute("formulario", form);
+				model.addAttribute("alumno", form);
 				return "alumnos/modificar";
 
 			} else {
@@ -104,22 +101,17 @@ public class AlumnoController {
 	}
 
 	@RequestMapping(value = "/modificar.html", method = RequestMethod.POST)
-	public String modificarPost(@ModelAttribute("formulario") AlumnoForm alumno, Model model) {
-		ArrayList<String> errores = new ArrayList<String>();
+	public String modificarPost(@Valid @ModelAttribute("alumno") AlumnoForm form, BindingResult result) {
 
-		// alumno.validar(errores);
-		if (errores.size() > 0) {
-
-			model.addAttribute("errores", errores);
-
+		this.validador.validate(form, result);
+		if (result.hasErrors()) {
 			return "alumnos/modificar";
+
 		} else {
 
-			this.alumnoService.update(alumno.obtenerAlumno());
-
+			this.alumnoService.update(form.obtenerAlumno());
 			return "redirect:/admin/alumnos/listado.html?mensaje=correcto";
 		}
-
 	}
 
 	@RequestMapping(value = "/eliminar.html", method = RequestMethod.GET)
