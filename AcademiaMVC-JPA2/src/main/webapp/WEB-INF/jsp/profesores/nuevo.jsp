@@ -6,7 +6,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-        
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Nuevo Profesor</h1>
@@ -24,30 +23,29 @@
                         
                             <div class="row">
                                 <div class="col-lg-6">
-                                
-                                    	<form:form action="./nuevo.html" method="post" modelAttribute="profesor" >
-                                    	<form:hidden path="id" />
-                                       	<spring:hasBindErrors name="*"> HAY ERRORRES QUE RESOLVER</spring:hasBindErrors>
-                                        <div class="form-group">
+                                <form:form action="./nuevo.html" method="post" modelAttribute="profesor" >
+                                <form:hidden path="id" />
+
+                                    <div class="form-group">
                                             <label>NIF</label>
                                            <form:input path="nif" class="form-control"/>
                                            <form:errors path="nif" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="profesor.nombre"/></label>
-                                             <form:input path="nombre" class="form-control"/>
-                                             <form:errors path="nombre" element="div" cssClass="alert alert-danger"/>
+                                            <label>Nombre</label>
+                                           <form:input path="nombre" class="form-control"/>
+                                           <form:errors path="nombre" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="profesor.apellido1"/> </label>
-                                            <form:input path="apellido1" class="form-control"/>
-                                            <form:errors path="apellido1" element="div" cssClass="alert alert-danger"/>
+                                            <label>Primer Apellido</label>
+                                           <form:input path="apellido1" class="form-control"/>
+                                           <form:errors path="apellido1" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="profesor.apellido2"/></label>
+                                            <label>Segundo Apellido</label>
                                              <form:input path="apellido2" class="form-control"/>
                                             <form:errors path="apellido2" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
@@ -64,28 +62,15 @@
                                              <form:errors path="correo" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
-                                        <c:if test="${formulario.repetidor==true}">
-                                        <c:set var="chequeado" value="checked">
-                                        </c:set> </c:if>
                                         <div class="form-group">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <form:checkbox path="repetidor"/>
-                                                    <form:errors path="repetidor" element="div" cssClass="alert alert-danger"/>
-                                                </label>
-                                            </div>
+                                            <label>Titulacion</label>
+                                             <form:input path="titulacion" class="form-control"/>
+                                             <form:errors path="titulacion" element="div" cssClass="alert alert-danger"/>
+                                            <p class="help-block"></p>
                                         </div>
-                                        
-                                        <div class="form-group">
-                                            <label>Observaciones</label>
-                                            <form:textarea path="observaciones" rows="3"/>
-                                            <form:errors path="observaciones" element="div" cssClass="alert alert-danger"/>
-                                            
-                                        </div>
-                                      		
+                                      
                                         <button type="submit" class="btn btn-default">Enviar</button>
                                         <button type="reset" class="btn btn-default">Limpiar</button>
-                                   
                                     </form:form>
                                 </div>
                                
@@ -95,12 +80,5 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-            
+            </div>            
             </div>
-            
-            
-            </div>
-          
-            
-            
-       

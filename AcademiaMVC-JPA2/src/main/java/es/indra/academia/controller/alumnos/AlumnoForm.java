@@ -61,6 +61,8 @@ public class AlumnoForm {
 		this.correo = (a.getCorreo());
 		this.observaciones = (a.getObservaciones());
 		this.repetidor = (a.getRepetidor());
+		this.fechaAlta = (a.getFechaAlta());
+		this.fechaBaja = (a.getFechaBaja());
 	}
 
 	public Alumno obtenerAlumno() {
@@ -74,28 +76,10 @@ public class AlumnoForm {
 		a.setCorreo(getCorreo());
 		a.setObservaciones(getObservaciones());
 		a.setRepetidor(getRepetidor());
+		a.setFechaAlta(getFechaAlta());
+		a.setFechaBaja(getFechaBaja());
 		return a;
 	}
-
-//	public void validar(List<String> errores) {
-//		if (nif == null || nif.equals("")) {
-//			errores.add("El nif es obligatorio");
-//
-//		}
-//		if (nif.length() != 9) {
-//			errores.add("El formato de NIF no es correcto");
-//
-//		}
-//		if (nombre=() == null || getNombre().equals("")) {
-//			errores.add("El Nombre es obligatorio");
-//
-//		}
-//		if (getApellido1() == null || getApellido1().equals("")) {
-//			errores.add("El Primero Apellido es obligatorio");
-//
-//		}
-//
-//	}
 
 	public Long getId() {
 		return this.id;

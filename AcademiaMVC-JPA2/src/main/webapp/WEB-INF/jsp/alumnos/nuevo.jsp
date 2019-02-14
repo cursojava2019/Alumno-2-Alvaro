@@ -25,6 +25,8 @@
                                 
                                     	<form:form action="./nuevo.html" method="post" modelAttribute="alumno" >
                                     	<form:hidden path="id" />
+                                    	
+                                    	<spring:hasBindErrors name="*"> HAY ERRORRES QUE RESOLVER</spring:hasBindErrors>
                                        
                                         <div class="form-group">
                                             <label>NIF</label>
@@ -33,31 +35,31 @@
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="alumno.nombre"/>Nombre</label>
+                                            <label><spring:message code="alumno.nombre"/></label>
                                              <form:input path="nombre" class="form-control"/>
                                              <form:errors path="nombre" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="alumno.apellido1"/>Primer apellido</label>
+                                            <label><spring:message code="alumno.apellido1"/> </label>
                                             <form:input path="apellido1" class="form-control"/>
                                             <form:errors path="apellido1" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="alumno.apellido2"/>Segundo apellido</label>
+                                            <label><spring:message code="alumno.apellido2"/></label>
                                              <form:input path="apellido2" class="form-control"/>
                                             <form:errors path="apellido2" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="alumno.telefono"/>Telefono</label>
+                                            <label>Telefono</label>
                                              <form:input path="telefono" class="form-control"/>
                                             <form:errors path="telefono" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
-                                            <label><spring:message code="alumno.correo"/>Correo</label>
+                                            <label>Correo</label>
                                              <form:input path="correo" class="form-control"/>
                                              <form:errors path="correo" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
@@ -76,7 +78,7 @@
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label><spring:message code="alumno.observaciones"/>Observaciones</label>
+                                            <label>Observaciones</label>
                                             <form:textarea path="observaciones" rows="3"/>
                                             <form:errors path="observaciones" element="div" cssClass="alert alert-danger"/>
                                             
