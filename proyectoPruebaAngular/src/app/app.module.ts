@@ -8,6 +8,8 @@ import { MiComponenteComponent } from './mi-componente/mi-componente.component';
 import { Micomponente2Component } from './micomponente2/micomponente2.component';
 import { GestorTareasComponent } from './gestor-tareas/gestor-tareas.component';
 import { TareaComponent } from './gestor-tareas/tarea/tarea.component';
+import { CabeceraComponent } from './cabecera/cabecera.component';
+import { PieComponent } from './pie/pie.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { TareaComponent } from './gestor-tareas/tarea/tarea.component';
     MiComponenteComponent,
     Micomponente2Component,
     GestorTareasComponent,
-    TareaComponent
+    TareaComponent,
+    CabeceraComponent,
+    PieComponent
   ],
   imports: [
     BrowserModule,
