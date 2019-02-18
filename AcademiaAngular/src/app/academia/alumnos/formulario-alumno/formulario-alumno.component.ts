@@ -21,7 +21,14 @@ export class FormularioAlumnoComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder) {
+
+}
+
+
+
+  ngOnInit() {
     this.miFormulario = this.fb.group({
+      id: this.fb.control(''),
       nombre: this.fb.control('', [
         Validators.required,
         Validators.minLength(3)
@@ -56,17 +63,22 @@ export class FormularioAlumnoComponent implements OnInit {
       ])
 
   });
-}
 
-
-
-  ngOnInit() {
+  if (this.modificar===true) {
+       this.miFormulario.patchValue (this.alumnoModificar);
+  }
   }
 
   guardarCambios(){
-   let alumnoForm: Alumno =this.miFormulario.value;
-   alumnoForm.fechaAlta= new Date();
-   this.modificado.next(alumnoForm);
+   if (this.modificar==false){
+      let alumnoForm: Alumno =this.miFormulario.value;
+      alumnoForm.fechaAlta= new Date();
+      this.modificado.next(alumnoForm);
+   }else {
+    let alumnoForm: Alumno =this.miFormulario.value;
+
+     this.modificado.next(alumnoForm);
+   }
   }
 
 }

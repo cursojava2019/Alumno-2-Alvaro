@@ -18,8 +18,10 @@ export class CrearAlumnoComponent implements OnInit {
   }
 
    crear(a: Alumno) {
-     this.alumnoService.create(a);
-     this.router.navigate(['alumnos']);
+     this.alumnoService.create(a).subscribe(data => {
+      this.router.navigate(['alumnos']);
+     });
+
    }
 
 }
