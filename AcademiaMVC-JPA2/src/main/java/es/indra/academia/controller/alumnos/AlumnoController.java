@@ -42,22 +42,6 @@ public class AlumnoController {
 		return "alumnos/listado";
 	}
 
-	/*
-	 * @RequestMapping(value = "/listado.html", method = RequestMethod.GET) public
-	 * String listado(@RequestParam("patron") String patron, Model model) {
-	 * MyUserDetails user = (MyUserDetails)
-	 * SecurityContextHolder.getContext().getAuthentication().getPrincipal(); String
-	 * name = user.getUsername(); // get logged in username
-	 * 
-	 * List<Alumno> listado = null; if (patron != null && !patron.equals("")) {
-	 * listado = this.alumnoService.findAlumnosPatron(patron); } else { listado =
-	 * this.alumnoService.findAll(); }
-	 * 
-	 * this.log.info("listado Alumnos"); model.addAttribute("listado", listado);
-	 * return "alumnos/listado"; }
-	 *
-	 */
-
 	@RequestMapping(value = "/nuevo.html", method = RequestMethod.GET)
 	public String nuevo(Model model) {
 		model.addAttribute("alumno", new AlumnoForm(new Alumno()));
@@ -89,7 +73,7 @@ public class AlumnoController {
 			Alumno alumno = this.alumnoService.find(id);
 			if (alumno != null) {
 				AlumnoForm form = new AlumnoForm(alumno);
-				model.addAttribute("alumno", form);
+				model.addAttribute("formulario", form);
 				return "alumnos/modificar";
 
 			} else {
@@ -101,17 +85,22 @@ public class AlumnoController {
 	}
 
 	@RequestMapping(value = "/modificar.html", method = RequestMethod.POST)
-	public String modificarPost(@Valid @ModelAttribute("alumno") AlumnoForm form, BindingResult result) {
+	public String modificarPost(@ModelAttribute("formulario") AlumnoForm alumno, Model model) {
+		ArrayList<String> errores = new ArrayList<String>();
 
-		this.validador.validate(form, result);
-		if (result.hasErrors()) {
+		// alumno.validar(errores);
+		if (errores.size() > 0) {
+
+			model.addAttribute("errores", errores);
+
 			return "alumnos/modificar";
-
 		} else {
 
-			this.alumnoService.update(form.obtenerAlumno());
+			this.alumnoService.update(alumno.obtenerAlumno());
+
 			return "redirect:/admin/alumnos/listado.html?mensaje=correcto";
 		}
+
 	}
 
 	@RequestMapping(value = "/eliminar.html", method = RequestMethod.GET)

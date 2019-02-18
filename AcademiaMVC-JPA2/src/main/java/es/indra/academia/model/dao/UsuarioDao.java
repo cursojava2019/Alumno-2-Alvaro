@@ -8,11 +8,10 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
 import es.indra.academia.model.entities.Usuario;
-import es.indra.academia.model.support.Dao;
 import es.indra.academia.model.support.DaoException;
 
 @Repository
-public class UsuarioDao implements Dao<Long, Usuario> {
+public class UsuarioDao {
 
 	private HashMap<String, Usuario> listado = new HashMap<String, Usuario>();
 
@@ -38,36 +37,31 @@ public class UsuarioDao implements Dao<Long, Usuario> {
 		usuario.setId(new Long(3));
 		usuario.setUsuario("usuario3");
 		usuario.setClave("password3");
-		usuario.setHabilitado(true);// Si lo pones a false no funcionará
+		usuario.setHabilitado(false);
 		usuario.setPermisos("ALUMNOS;PROFESORES");
 		this.listado.put("usuario3", usuario);
 	}
 
-	@Override
 	public void create(Usuario entity) throws DaoException {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void update(Usuario entity) throws DaoException {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void delete(Long key) throws DaoException {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public Usuario find(Long key) throws DaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public List<Usuario> findAll() throws DaoException {
 		// TODO Auto-generated method stub
 		return null;

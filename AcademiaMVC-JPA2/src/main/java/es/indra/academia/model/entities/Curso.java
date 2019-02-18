@@ -9,16 +9,20 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="curso")
 @NamedQuery(name="Curso.findAll", query="SELECT c FROM Curso c")
 public class Curso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	private Long id;
 
+	@Column(nullable=false, length=50)
 	private String etapa;
 
+	@Column(nullable=false, length=50)
 	private String nivel;
 
 	public Curso() {

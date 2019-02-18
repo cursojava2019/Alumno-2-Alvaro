@@ -13,7 +13,7 @@
 		<version.spring.security>3.2.3.RELEASE</version.spring.security>
 		 <apachetiles.version>2.2.2</apachetiles.version>
 		 <version.spring.data.jpa>1.5.1.RELEASE</version.spring.data.jpa>
-		<jackson.library>2.9.8</jackson.library>
+		<jackson.library>2.7.5</jackson.library>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -214,11 +214,6 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>${jackson.library}</version>
         </dependency>
-        <dependency>
-    <groupId>com.fasterxml.jackson.datatype</groupId>
-    <artifactId>jackson-datatype-hibernate5</artifactId>
-    <version>${jackson.library}</version>
-</dependency>
 	</dependencies>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>

@@ -1,10 +1,11 @@
 package es.indra.academia.model.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,53 +16,67 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.PastOrPresent;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * The persistent class for the alumno database table.
  *
  */
 @Entity
+@Table(name = "alumno")
 @NamedQuery(name = "Alumno.findAll", query = "SELECT a FROM Alumno a")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Alumno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private Long id;
 
+	@Column(length = 100)
 	private String apellido1;
 
+	@Column(length = 100)
 	private String apellido2;
 
+	@Column(length = 100)
 	private String correo;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private @PastOrPresent Date fechaAlta;
+	private Calendar fechaAlta;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date fechaBaja;
+	private Calendar fechaBaja;
 
+	@Column(length = 9)
 	private String nif;
 
+	@Column(length = 100)
 	private String nombre;
 
+	@Column(length = 100)
 	private String observaciones;
 
+	@Column(nullable = false)
 	private Boolean repetidor;
 
+	@Column(length = 9)
 	private String telefono;
 
 	// bi-directional many-to-many association to Clase
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "alumno_clase", joinColumns = { @JoinColumn(name = "id_alumno") }, inverseJoinColumns = {
-			@JoinColumn(name = "id_clase") })
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@JoinTable(name = "alumno_clase", joinColumns = {
+			@JoinColumn(name = "id_alumno", nullable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "id_clase", nullable = false) })
 	private List<Clase> clases;
 
 	// bi-directional many-to-one association to ResponsableAlumno
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinColumn(name = "responsable")
 	private ResponsableAlumno responsable;
 
@@ -100,19 +115,19 @@ public class Alumno implements Serializable {
 		this.correo = correo;
 	}
 
-	public @PastOrPresent Date getFechaAlta() {
+	public Calendar getFechaAlta() {
 		return this.fechaAlta;
 	}
 
-	public void setFechaAlta(@PastOrPresent Date date) {
-		this.fechaAlta = date;
+	public void setFechaAlta(Calendar fechaAlta) {
+		this.fechaAlta = fechaAlta;
 	}
 
-	public Date getFechaBaja() {
+	public Calendar getFechaBaja() {
 		return this.fechaBaja;
 	}
 
-	public void setFechaBaja(Date fechaBaja) {
+	public void setFechaBaja(Calendar fechaBaja) {
 		this.fechaBaja = fechaBaja;
 	}
 
@@ -170,6 +185,14 @@ public class Alumno implements Serializable {
 
 	public void setResponsable(ResponsableAlumno responsable) {
 		this.responsable = responsable;
+	}
+
+	@Override
+	public String toString() {
+		return "Alumno [id=" + this.id + ", apellido1=" + this.apellido1 + ", apellido2=" + this.apellido2 + ", correo="
+				+ this.correo + ", fechaAlta=" + this.fechaAlta + ", fechaBaja=" + this.fechaBaja + ", nif=" + this.nif
+				+ ", nombre=" + this.nombre + ", observaciones=" + this.observaciones + ", repetidor=" + this.repetidor
+				+ ", telefono=" + this.telefono + ", clases=" + this.clases + ", responsable=" + this.responsable + "]";
 	}
 
 }

@@ -10,20 +10,22 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="clase")
 @NamedQuery(name="Clase.findAll", query="SELECT c FROM Clase c")
 public class Clase implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	private Long id;
 
 	//bi-directional many-to-many association to Alumno
 	@ManyToMany(mappedBy="clases", cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	private List<Alumno> alumnos;
 
-	//bi-directional many-to-one association to Asignatura
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	//uni-directional many-to-one association to Asignatura
+	@ManyToOne
 	@JoinColumn(name="id_asignatura")
 	private Asignatura asignatura;
 
@@ -32,7 +34,7 @@ public class Clase implements Serializable {
 	@JoinColumn(name="id_profesor")
 	private Profesor profesor;
 
-	//bi-directional many-to-one association to Tarifa
+	//uni-directional many-to-one association to Tarifa
 	@ManyToOne
 	@JoinColumn(name="id_tarifa")
 	private Tarifa tarifa;

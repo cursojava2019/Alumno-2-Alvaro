@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" 	prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-            
+
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Modificar Alumno</h1>
@@ -24,7 +24,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                                           			 
-                           			<form:form action="./modificar.html" method="post" modelAttribute="alumno" >
+                           			<form:form action="./modificar.html" method="post" modelAttribute="formulario" >
                                     	<form:hidden path="id" />
                                        
                                         <div class="form-group">
@@ -36,31 +36,29 @@
                                         <div class="form-group">
                                             <label>Nombre</label>
                                              <form:input path="nombre" class="form-control"/>
-                                             <form:errors path="nombre" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Primer Apellido </label>
                                             <form:input path="apellido1" class="form-control"/>
-                                            <form:errors path="apellido1" element="div" cssClass="alert alert-danger"/>
+                                            
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Segundo Apellido</label>
-                                            <form:input path="apellido2" class="form-control"/>
-                                            <form:errors path="apellido2" element="div" cssClass="alert alert-danger"/>
+                                             <form:input path="apellido2" class="form-control"/>
+                                            
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Telefono</label>
-                                            <form:input path="telefono" class="form-control"/>
-                                            <form:errors path="telefono" element="div" cssClass="alert alert-danger"/>
+                                             <form:input path="telefono" class="form-control"/>
+                                            
                                             <p class="help-block"></p>
                                         </div>
                                         <div class="form-group">
                                             <label>Correo</label>
                                              <form:input path="correo" class="form-control"/>
-                                             <form:errors path="correo" element="div" cssClass="alert alert-danger"/>
                                             <p class="help-block"></p>
                                         </div>
                                         <c:if test="${formulario.repetidor==true}">
@@ -70,7 +68,7 @@
                                             <div class="checkbox">
                                                 <label>
                                                     <form:checkbox path="repetidor"/>
-                                                    <form:errors path="repetidor" element="div" cssClass="alert alert-danger"/>
+                                                    
                                                 </label>
                                             </div>
                                         </div>
@@ -80,13 +78,7 @@
                                             <form:textarea path="observaciones" rows="3"/>
                                             
                                         </div>
-                                       <!-- 
-                                       
-                                       <form:hidden path="fechaAlta"/>
-                                       <form:hidden path="fechaBaja"/> 
-                                        -->    
-                                        
-                                        
+                                      		
                                         <button type="submit" class="btn btn-default">Enviar</button>
                                         <button type="reset" class="btn btn-default">Limpiar</button>
                                    
@@ -99,5 +91,12 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
+            
             </div>
+            
+            
             </div>
+            
+            
+            
+      

@@ -6,11 +6,10 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import es.indra.academia.model.dao.AlumnoDao;
 import es.indra.academia.model.entities.Alumno;
-import es.indra.academia.model.support.Dao;
-import es.indra.academia.model.support.DaoException;
 import es.indra.academia.model.support.Service;
 
 @org.springframework.stereotype.Service
@@ -20,15 +19,16 @@ public class AlumnoService extends Service<Long, Alumno> {
 	private Logger log = LogManager.getLogger(AlumnoService.class);
 
 	@Override
-	protected Dao<Long, Alumno> getDao() {
+	protected JpaRepository<Alumno, Long> getDao() {
+
 		return this.dao;
 	}
 
 	public List<Alumno> findAlumnosPatron(String patron) {
 		try {
-			return this.dao.findAlumnos(patron);
-		} catch (DaoException e) {
-			e.printStackTrace();
+			return this.dao.findAlumnosPatron(patron);
+		} catch (Exception e) {
+			this.log.error(e);
 			return new ArrayList<Alumno>();
 		}
 
@@ -42,8 +42,8 @@ public class AlumnoService extends Service<Long, Alumno> {
 
 	public List<Alumno> buscarNif(String nif) {
 		try {
-			return this.dao.buscarNif(nif);
-		} catch (DaoException e) {
+			return this.dao.findByNifEquals(nif);
+		} catch (Exception e) {
 			this.log.error("Error buscando NIF", e);
 			return null;
 		}

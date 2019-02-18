@@ -6,23 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import es.indra.academia.model.dao.UsuarioDao;
 import es.indra.academia.model.entities.Usuario;
-import es.indra.academia.model.support.Dao;
 import es.indra.academia.model.support.DaoException;
-import es.indra.academia.model.support.Service;
 
 @org.springframework.stereotype.Service
-public class UsuarioService extends Service<Long, Usuario> {
+public class UsuarioService {
 
 	@Autowired
 	UsuarioDao dao;
 	private Logger log = LogManager.getLogger(UsuarioService.class);
 
-	@Override
-	protected Dao<Long, Usuario> getDao() {
+	protected UsuarioDao getDao() {
 		return this.dao;
 	}
 
-	@Override
 	protected Logger getLog() {
 		return this.log;
 	}

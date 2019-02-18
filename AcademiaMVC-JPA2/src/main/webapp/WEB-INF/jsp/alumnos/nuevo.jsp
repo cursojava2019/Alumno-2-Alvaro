@@ -3,8 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" 	prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+        
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">Nuevo Alumno</h1>
@@ -25,9 +27,7 @@
                                 
                                     	<form:form action="./nuevo.html" method="post" modelAttribute="alumno" >
                                     	<form:hidden path="id" />
-                                    	
-                                    	<spring:hasBindErrors name="*"> HAY ERRORRES QUE RESOLVER</spring:hasBindErrors>
-                                       
+                                       	<spring:hasBindErrors name="*"> HAY ERRORRES QUE RESOLVER</spring:hasBindErrors>
                                         <div class="form-group">
                                             <label>NIF</label>
                                            <form:input path="nif" class="form-control"/>
@@ -69,7 +69,6 @@
                                         </c:set> </c:if>
                                         <div class="form-group">
                                             <div class="checkbox">
-                                            <label>Repetidor</label>
                                                 <label>
                                                     <form:checkbox path="repetidor"/>
                                                     <form:errors path="repetidor" element="div" cssClass="alert alert-danger"/>
@@ -96,5 +95,12 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
+            
             </div>
+            
+            
             </div>
+          
+            
+            
+       
