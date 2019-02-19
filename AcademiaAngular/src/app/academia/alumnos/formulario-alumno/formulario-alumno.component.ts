@@ -12,7 +12,7 @@ export class FormularioAlumnoComponent implements OnInit {
 
   miFormulario: FormGroup;
   @Input()
-  modificar: boolean =false;
+  modificar = false;
   @Input()
   alumnoModificar: Alumno;
 
@@ -53,7 +53,7 @@ export class FormularioAlumnoComponent implements OnInit {
         Validators.required,
         Validators.email
       ]),
-      repetidor: this.fb.control('', [
+      repetidor: this.fb.control(false, [
       ]),
       observaciones: this.fb.control('', [
         Validators.maxLength(1000)
@@ -64,18 +64,19 @@ export class FormularioAlumnoComponent implements OnInit {
 
   });
 
-  if (this.modificar===true) {
+  if (this.modificar === true) {
+     console.log('patch '+ this.alumnoModificar);
        this.miFormulario.patchValue (this.alumnoModificar);
   }
   }
 
-  guardarCambios(){
-   if (this.modificar==false){
-      let alumnoForm: Alumno =this.miFormulario.value;
-      alumnoForm.fechaAlta= new Date();
+  guardarCambios() {
+   if (this.modificar == false) {
+      const alumnoForm: Alumno = this.miFormulario.value;
+      alumnoForm.fechaAlta = new Date();
       this.modificado.next(alumnoForm);
-   }else {
-    let alumnoForm: Alumno =this.miFormulario.value;
+   } else {
+    const alumnoForm: Alumno = this.miFormulario.value;
 
      this.modificado.next(alumnoForm);
    }

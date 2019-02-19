@@ -8,17 +8,17 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AlumnoService {
-  url= 'http://192.168.1.19:8080/academiamvc/services/alumnos/';
+  url = 'http://localhost:8080/academiaWeb/services/alumnos/';
   constructor(private http: HttpClient) {
 
   }
 
-  findAll():Observable<Alumno[]>{
+  findAll(): Observable<Alumno[]> {
     return this.http.get<Alumno[]>(this.url);
   }
 
   findById(id: number): Observable<Alumno> {
-    console.log("id FindById " + id);
+    console.log('id FindById ' + id);
     return this.http.get<Alumno>(this.url + id);
   }
   create(a: Alumno): Observable<Alumno> {

@@ -19,8 +19,8 @@ export class ModicarAlumnoComponent implements OnInit {
 
   ngOnInit() {
     let id = this.rutaActiva.snapshot.params.idAlumno;
-    this.alumnoService.findById(id).subscribe(data=>{
-      this.alumnoActual=data;
+    this.alumnoService.findById(id).subscribe(data => {
+      this.alumnoActual = data;
       console.log(this.alumnoActual);
     })
 
@@ -28,7 +28,7 @@ export class ModicarAlumnoComponent implements OnInit {
   }
 
   modificar(a: Alumno){
-    this.alumnoService.modificar(a).subscribe(data=>{
+    this.alumnoService.modificar(a).subscribe(data => {
       this.router.navigate(['alumnos']);
     });
 
