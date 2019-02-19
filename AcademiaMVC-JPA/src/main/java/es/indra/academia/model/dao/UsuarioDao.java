@@ -38,9 +38,17 @@ public class UsuarioDao implements Dao<Long, Usuario> {
 		usuario.setId(new Long(3));
 		usuario.setUsuario("usuario3");
 		usuario.setClave("password3");
-		usuario.setHabilitado(false);
-		usuario.setPermisos("ALUMNOS;PROFESORES");
+		usuario.setHabilitado(true);
+		usuario.setPermisos("RESPONSABLES");
 		this.listado.put("usuario3", usuario);
+		
+		usuario = new Usuario();
+		usuario.setId(new Long(4));
+		usuario.setUsuario("usuario4");
+		usuario.setClave("password4");
+		usuario.setHabilitado(true);
+		usuario.setPermisos("ALUMNOS;PROFESORES;RESPONSABLES");
+		this.listado.put("usuario4", usuario);
 	}
 
 	@Override

@@ -8,12 +8,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import es.indra.academia.model.entities.Alumno;
-import es.indra.academia.model.service.AlumnoService;
+import es.indra.academia.model.service.AlumnoJpaService;
 
 @Component
 public class AlumnoFormValidator implements Validator {
+
 	@Autowired
-	private AlumnoService alumnoService;
+	private AlumnoJpaService alumnoService;
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -30,9 +31,9 @@ public class AlumnoFormValidator implements Validator {
 				if (form.getId() == null || (!alumno.getId().equals(form.getId()))) {
 					errors.rejectValue("nif", "nif.unico");
 				}
-
 			}
 		}
+
 	}
 
 }

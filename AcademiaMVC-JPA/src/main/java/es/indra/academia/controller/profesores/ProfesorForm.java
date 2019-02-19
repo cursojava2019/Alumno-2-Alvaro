@@ -17,17 +17,16 @@ public class ProfesorForm {
 	private String nombre;
 	@NotNull
 	@NotEmpty
-	@Size(min = 3, max = 100)
 	private String apellido1;
 	private String apellido2;
-	@Size(min = 9, max = 9)
+	@Size(min = 3, max = 9)
 	private String nif;
 
 	private String telefono;
 	@Email
 	@NotEmpty
 	private String correo;
-	@Size(min = 0, max = 500)
+	@NotEmpty
 	private String titulacion;
 
 	public ProfesorForm() {
@@ -41,30 +40,31 @@ public class ProfesorForm {
 		this.titulacion = "";
 	}
 
-	public ProfesorForm(Profesor a) {
+	public ProfesorForm(Profesor p) {
 		super();
-		this.id = a.getId();
-		this.nif = (a.getNif());
-		this.nombre = (a.getNombre());
-		this.apellido1 = (a.getApellido1());
-		this.apellido2 = (a.getApellido2());
-		this.telefono = (a.getTelefono());
-		this.correo = (a.getCorreo());
-		this.titulacion = (a.getTitulacion());
+		this.id = p.getId();
+		this.nif = (p.getNif());
+		this.nombre = (p.getNombre());
+		this.apellido1 = (p.getApellido1());
+		this.apellido2 = (p.getApellido2());
+		this.telefono = (p.getTelefono());
+		this.correo = (p.getCorreo());
+		this.titulacion = (p.getTitulacion());
+
 	}
 
 	public Profesor obtenerProfesor() {
-		Profesor a = new Profesor();
-		a.setId(getId());
-		a.setNif(getNif());
-		a.setNombre(getNombre());
-		a.setApellido1(getApellido1());
-		a.setApellido2(getApellido2());
-		a.setTelefono(getTelefono());
-		a.setCorreo(getCorreo());
-		a.setTitulacion(getTitulacion());
+		Profesor p = new Profesor();
+		p.setId(getId());
+		p.setNif(getNif());
+		p.setNombre(getNombre());
+		p.setApellido1(getApellido1());
+		p.setApellido2(getApellido2());
+		p.setTelefono(getTelefono());
+		p.setCorreo(getCorreo());
+		p.setTitulacion(getTitulacion());
 
-		return a;
+		return p;
 	}
 
 	public Long getId() {
@@ -124,10 +124,11 @@ public class ProfesorForm {
 	}
 
 	public String getTitulacion() {
-		return this.titulacion;
+		return titulacion;
 	}
 
 	public void setTitulacion(String titulacion) {
 		this.titulacion = titulacion;
 	}
+
 }

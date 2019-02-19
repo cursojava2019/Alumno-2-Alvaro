@@ -34,12 +34,6 @@ public class AlumnoService extends Service<Long, Alumno> {
 
 	}
 
-	@Override
-	protected Logger getLog() {
-		return this.log;
-
-	}
-
 	public List<Alumno> buscarNif(String nif) {
 		try {
 			return this.dao.buscarNif(nif);

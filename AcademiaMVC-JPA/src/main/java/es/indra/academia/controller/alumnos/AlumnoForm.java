@@ -1,6 +1,6 @@
 package es.indra.academia.controller.alumnos;
 
-import java.util.Date;
+import java.util.Calendar;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -10,6 +10,7 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import es.indra.academia.model.entities.Alumno;
+import es.indra.academia.model.entities.ResponsableAlumno;
 
 public class AlumnoForm {
 	@Positive
@@ -20,10 +21,9 @@ public class AlumnoForm {
 	private String nombre;
 	@NotNull
 	@NotEmpty
-	@Size(min = 3, max = 100)
 	private String apellido1;
 	private String apellido2;
-	@Size(min = 9, max = 9)
+	@Size(min = 3, max = 9)
 	private String nif;
 
 	private String telefono;
@@ -32,11 +32,11 @@ public class AlumnoForm {
 	private String correo;
 	private Boolean repetidor;
 	@PastOrPresent
-	private Date fechaAlta;
-
-	private Date fechaBaja;
+	private Calendar fechaAlta;
+	private Calendar fechaBaja;
 	@Size(min = 0, max = 500)
 	private String observaciones;
+	private ResponsableAlumno responsableAlumno;
 
 	public AlumnoForm() {
 		super();
@@ -63,6 +63,8 @@ public class AlumnoForm {
 		this.repetidor = (a.getRepetidor());
 		this.fechaAlta = (a.getFechaAlta());
 		this.fechaBaja = (a.getFechaBaja());
+		this.responsableAlumno = (a.getResponsableAlumno());
+
 	}
 
 	public Alumno obtenerAlumno() {
@@ -78,28 +80,25 @@ public class AlumnoForm {
 		a.setRepetidor(getRepetidor());
 		a.setFechaAlta(getFechaAlta());
 		a.setFechaBaja(getFechaBaja());
+		a.setResponsableAlumno(getResponsableAlumno());
 		return a;
 	}
 
-//	public void validar(List<String> errores) {
-//		if (nif == null || nif.equals("")) {
-//			errores.add("El nif es obligatorio");
-//
-//		}
-//		if (nif.length() != 9) {
-//			errores.add("El formato de NIF no es correcto");
-//
-//		}
-//		if (nombre=() == null || getNombre().equals("")) {
-//			errores.add("El Nombre es obligatorio");
-//
-//		}
-//		if (getApellido1() == null || getApellido1().equals("")) {
-//			errores.add("El Primero Apellido es obligatorio");
-//
-//		}
-//
-//	}
+	public void modificar(Alumno a) {
+
+		a.setNif(getNif());
+		a.setNombre(getNombre());
+		a.setApellido1(getApellido1());
+		a.setApellido2(getApellido2());
+		a.setTelefono(getTelefono());
+		a.setCorreo(getCorreo());
+		a.setObservaciones(getObservaciones());
+		a.setRepetidor(getRepetidor());
+		a.setFechaAlta(getFechaAlta());
+		a.setFechaBaja(getFechaBaja());
+		a.setResponsableAlumno(getResponsableAlumno());
+
+	}
 
 	public Long getId() {
 		return this.id;
@@ -165,19 +164,19 @@ public class AlumnoForm {
 		this.repetidor = repetidor;
 	}
 
-	public Date getFechaAlta() {
+	public Calendar getFechaAlta() {
 		return this.fechaAlta;
 	}
 
-	public void setFechaAlta(Date fechaAlta) {
+	public void setFechaAlta(Calendar fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
 
-	public Date getFechaBaja() {
+	public Calendar getFechaBaja() {
 		return this.fechaBaja;
 	}
 
-	public void setFechaBaja(Date fechaBaja) {
+	public void setFechaBaja(Calendar fechaBaja) {
 		this.fechaBaja = fechaBaja;
 	}
 
@@ -189,31 +188,11 @@ public class AlumnoForm {
 		this.observaciones = observaciones;
 	}
 
-	public String getFechaAltaString() {
-		if (this.fechaAlta != null) {
-			return Long.toString(this.fechaAlta.getTime());
-		} else {
-			return "";
-		}
+	public ResponsableAlumno getResponsableAlumno() {
+		return responsableAlumno;
 	}
 
-	public String getFechaBajaString() {
-		if (this.fechaBaja != null) {
-			return Long.toString(this.fechaBaja.getTime());
-		} else {
-			return "";
-		}
-	}
-
-	public void setFechaAltaString(String fechaString) {
-		Long timeStamp = Long.parseLong(fechaString);
-		this.fechaAlta = (new Date(timeStamp));
-
-	}
-
-	public void setFechaBajaString(String fechaString) {
-		Long timeStamp = Long.parseLong(fechaString);
-		this.fechaBaja = (new Date(timeStamp));
-
+	public void setResponsableAlumno(ResponsableAlumno responsableAlumno) {
+		this.responsableAlumno = responsableAlumno;
 	}
 }

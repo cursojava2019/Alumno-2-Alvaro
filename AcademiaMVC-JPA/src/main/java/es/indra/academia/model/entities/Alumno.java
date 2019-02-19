@@ -1,39 +1,71 @@
 package es.indra.academia.model.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Calendar;
+import java.util.List;
+
+
+/**
+ * The persistent class for the alumno database table.
+ * 
+ */
 @Entity
-@Table(name = "ALUMNO")
-
+@NamedQuery(name="Alumno.findAll", query="SELECT a FROM Alumno a")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Alumno implements Serializable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private static final long serialVersionUID = 1L;
 
-	private String nombre;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
+	private Long id;
+	@Column(length = 100)
 	private String apellido1;
+	@Column(length = 100)
 	private String apellido2;
-	private String nif;
-	private String telefono;
+	@Column(length = 100)
 	private String correo;
-	private Boolean repetidor;
-	@Column(name = "fechaalta")
-	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date fechaAlta;
-	@Column(name = "fechabaja")
-	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date fechaBaja;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar fechaAlta;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar fechaBaja;
+	@Column(length = 9)
+	private String nif;
+	@Column(length = 100)
+	private String nombre;
+	@Column(length = 100)
 	private String observaciones;
+	@Column(nullable = false)
+	private Boolean repetidor;
+	@Column(length = 9)
+	private String telefono;
+
+	//bi-directional many-to-one association to ResponsableAlumno
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@JoinColumn(name = "responsable")
+	private ResponsableAlumno responsableAlumno;
+
+	//bi-directional many-to-many association to Clase
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE },fetch=FetchType.EAGER)
+	@JoinTable(
+		name="alumno_clase"
+		, joinColumns={
+			@JoinColumn(name="id_alumno")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_clase")
+			}
+		)
+	private List<Clase> clases;
+
+	public Alumno() {
+	}
 
 	public Long getId() {
 		return this.id;
@@ -41,14 +73,6 @@ public class Alumno implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getApellido1() {
@@ -67,22 +91,6 @@ public class Alumno implements Serializable {
 		this.apellido2 = apellido2;
 	}
 
-	public String getNif() {
-		return this.nif;
-	}
-
-	public void setNif(String nif) {
-		this.nif = nif;
-	}
-
-	public String getTelefono() {
-		return this.telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
 	public String getCorreo() {
 		return this.correo;
 	}
@@ -91,32 +99,36 @@ public class Alumno implements Serializable {
 		this.correo = correo;
 	}
 
-	public Boolean getRepetidor() {
-		if (this.repetidor == null) {
-			return false;
-		} else {
-			return this.repetidor;
-		}
-	}
-
-	public void setRepetidor(Boolean repetidor) {
-		this.repetidor = repetidor;
-	}
-
-	public Date getFechaAlta() {
+	public Calendar getFechaAlta() {
 		return this.fechaAlta;
 	}
 
-	public void setFechaAlta(Date fechaAlta) {
-		this.fechaAlta = fechaAlta;
+	public void setFechaAlta(Calendar date) {
+		this.fechaAlta = date;
 	}
 
-	public Date getFechaBaja() {
+	public Calendar getFechaBaja() {
 		return this.fechaBaja;
 	}
 
-	public void setFechaBaja(Date fechaBaja) {
+	public void setFechaBaja(Calendar fechaBaja) {
 		this.fechaBaja = fechaBaja;
+	}
+
+	public String getNif() {
+		return this.nif;
+	}
+
+	public void setNif(String nif) {
+		this.nif = nif;
+	}
+
+	public String getNombre() {
+		return this.nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public String getObservaciones() {
@@ -127,12 +139,36 @@ public class Alumno implements Serializable {
 		this.observaciones = observaciones;
 	}
 
-	@Override
-	public String toString() {
-		return "Alumno [id=" + this.id + ", nombre=" + this.nombre + ", apellido1=" + this.apellido1 + ", apellido2="
-				+ this.apellido2 + ", nif=" + this.nif + ", telefono=" + this.telefono + ", correo=" + this.correo
-				+ ", repetidor=" + this.repetidor + ", fechaAlta=" + this.fechaAlta + ", fechaBaja=" + this.fechaBaja
-				+ ", observaciones=" + this.observaciones + "]";
+	public Boolean getRepetidor() {
+		return this.repetidor;
+	}
+
+	public void setRepetidor(Boolean repetidor) {
+		this.repetidor = repetidor;
+	}
+
+	public String getTelefono() {
+		return this.telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public ResponsableAlumno getResponsableAlumno() {
+		return this.responsableAlumno;
+	}
+
+	public void setResponsableAlumno(ResponsableAlumno responsableAlumno) {
+		this.responsableAlumno = responsableAlumno;
+	}
+
+	public List<Clase> getClases() {
+		return this.clases;
+	}
+
+	public void setClases(List<Clase> clases) {
+		this.clases = clases;
 	}
 
 }

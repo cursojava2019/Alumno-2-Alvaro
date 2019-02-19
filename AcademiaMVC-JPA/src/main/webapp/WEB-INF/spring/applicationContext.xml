@@ -26,13 +26,16 @@
 			<value>classpath:configuracion.properties</value>
 		</property>
 	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager" mode="proxy" proxy-target-class="true"/>
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+
+<tx:annotation-driven transaction-manager="transactionManager" mode="proxy" proxy-target-class="true"/>
+  
+	
+ <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
     destroy-method="close"> 
     <property name="driverClassName" value="org.postgresql.Driver" />
     <property name="url" value="${bbdd.url}" />
     <property name="username" value="${bbdd.usuario}" />
-    <property name="password" value="${bbdd.password}" />
+    <property name="password" value="${bbdd.pass}" />
   </bean>
 
   <bean id="entityManagerFactory"
@@ -41,7 +44,7 @@
     <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"></property>
     <property name="dataSource" ref="dataSource" />
     <property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
-        <property name="jpaDialect" ref="jpaDialect" />
+    <property name="jpaDialect" ref="jpaDialect" />
   </bean>
 
   <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -59,5 +62,6 @@
     </bean>
 
     <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
-
+  <jpa:repositories base-package="es.indra.academia.model.dao" />
+  
 </beans>

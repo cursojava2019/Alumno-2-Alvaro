@@ -6,19 +6,19 @@
 	http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<http auto-config="true" access-denied-page="/admin/sinPermisos.html" use-expressions="true">
+	<http auto-config="true" access-denied-page="/admin/sinpermisos.html" use-expressions="true">
 		
-		<intercept-url pattern="/admin/index.html" access="hasAnyRole('ALUMNOS','PROFESORES')"/>
+		<intercept-url pattern="/admin/inicio.html" access="hasAnyRole('ALUMNOS','PROFESORES','RESPONSABLES')"/>
 		<intercept-url pattern="/admin/alumnos/**" access="hasRole('ALUMNOS')"/>
 		<intercept-url pattern="/admin/profesores/**" access="hasRole('PROFESORES')"/>
-		
+		<intercept-url pattern="/admin/responsables/**" access="hasRole('RESPONSABLES')"/>
 		
 		
 		
 		<form-login login-page="/index.html"  
 			login-processing-url="/j_spring_security_check" 
 			 authentication-failure-url="/index.html?loginFailed=true" 
-			default-target-url="/admin/index.html"
+			default-target-url="/admin/inicio.html"
 			 />
 		<logout invalidate-session="true" delete-cookies="true"
 		    logout-url="/logout"

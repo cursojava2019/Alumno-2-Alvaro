@@ -22,11 +22,6 @@ public class UsuarioService extends Service<Long, Usuario> {
 		return this.dao;
 	}
 
-	@Override
-	protected Logger getLog() {
-		return this.log;
-	}
-
 	public Usuario buscarUsuario(String username) {
 		try {
 			return this.dao.buscarUsuario(username);

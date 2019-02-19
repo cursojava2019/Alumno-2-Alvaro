@@ -1,5 +1,7 @@
 package es.indra.academia.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,16 @@ public class AlumnoJpaService extends ServiceJpa<Long, Alumno> {
 	@Override
 	public JpaDao<Long, Alumno> getDao() {
 		return this.dao;
+	}
+
+	public List<Alumno> buscarNif(String nif) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Alumno> findAlumnosPatron(String patron) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

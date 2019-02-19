@@ -34,12 +34,6 @@ public class ProfesorService extends Service<Long, Profesor> {
 
 	}
 
-	@Override
-	protected Logger getLog() {
-		return this.log;
-
-	}
-
 	public List<Profesor> buscarNif(String nif) {
 		try {
 			return this.dao.buscarNif(nif);

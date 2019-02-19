@@ -1,13 +1,9 @@
 package es.indra.academia.controller.profesores;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,26 +14,37 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.indra.academia.model.entities.Profesor;
-import es.indra.academia.model.service.ProfesorService;
-import es.indra.academia.authentication.MyUserDetails;
+import es.indra.academia.model.service.ProfesorJpaService;
+import es.indra.academia.model.support.DaoException;
+import es.indra.academia.model.support.ServiceException;
 
 @Controller
 @RequestMapping("/admin/profesores")
 public class ProfesorController {
 	@Autowired
-	ProfesorService profesorService;
+	ProfesorJpaService profesorService;
 
 	@Autowired
 	ProfesorFormValidator validador;
-	private Logger log = LogManager.getLogger(ProfesorController.class);
 
 	@RequestMapping(value = "/listado.html", method = RequestMethod.GET)
-	public String listado(Model model) {
-		MyUserDetails user = (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String name = user.getUsername(); // get logged in username
-		
-		this.log.info("listado Profesores");
-		List<Profesor> listado = this.profesorService.findAll();
+	public String listado(Model model) throws ServiceException, DaoException {
+		List<Profesor> listado = this.profesorService.buscarTodos();
+		model.addAttribute("listado", listado);
+		return "profesores/listado";
+	}
+
+	@RequestMapping(value = "/listado.html", method = RequestMethod.POST)
+	public String listadoPatron(@RequestParam("patron") String patron, Model model)
+			throws ServiceException, DaoException {
+		List<Profesor> listado;
+		if (patron == null || patron.equals("")) {
+			listado = profesorService.buscarTodos();
+
+		} else {
+			listado = profesorService.findProfesoresPatron(patron);
+		}
+		model.addAttribute("patron", patron);
 		model.addAttribute("listado", listado);
 		return "profesores/listado";
 	}
@@ -49,65 +56,58 @@ public class ProfesorController {
 	}
 
 	@RequestMapping(value = "/nuevo.html", method = RequestMethod.POST)
-	public String nuevoPost(@Valid @ModelAttribute("profesor") ProfesorForm form, BindingResult result) {
-		ArrayList<String> errores = new ArrayList<String>();
+	public String nuevoPost(@Valid @ModelAttribute("profesor") ProfesorForm form, BindingResult result)
+			throws ServiceException, DaoException {
 		this.validador.validate(form, result);
 		if (result.hasErrors()) {
 			return "profesores/nuevo";
-
 		} else {
-
-			this.profesorService.create(form.obtenerProfesor());
+			this.profesorService.crear(form.obtenerProfesor());
 			return "redirect:/admin/profesores/listado.html?mensaje=correcto";
-
 		}
 
 	}
 
 	@RequestMapping(value = "/modificar.html", method = RequestMethod.GET)
-	public String modificar(@RequestParam("id") Long id, Model model) {
+	public String modificar(@RequestParam("id") Long id, Model model) throws ServiceException, DaoException {
 		if (id == null) {
 			return "redirect:/admin/profesores/listado.html?mensaje=errorId";
-
 		} else {
-			Profesor profesor = this.profesorService.find(id);
+			Profesor profesor = this.profesorService.buscar(id);
 			if (profesor != null) {
 				ProfesorForm form = new ProfesorForm(profesor);
-				model.addAttribute("profesor", form);
+				model.addAttribute("formulario", form);
 				return "profesores/modificar";
-
 			} else {
 				return "redirect:/admin/profesores/listado.html?mensaje=errorId";
 			}
-
 		}
-
 	}
 
 	@RequestMapping(value = "/modificar.html", method = RequestMethod.POST)
-	public String modificarPost(@Valid @ModelAttribute("profesor") ProfesorForm form, BindingResult result) {
+	public String modificarPost(@Valid @ModelAttribute("formulario") ProfesorForm form, BindingResult result)
+			throws ServiceException, DaoException {
 		this.validador.validate(form, result);
 		if (result.hasErrors()) {
 			return "profesores/modificar";
-
 		} else {
 
-			this.profesorService.create(form.obtenerProfesor());
-			return "redirect:/admin/profesores/listado.html?mensaje=correcto";
+			this.profesorService.modificar(form.obtenerProfesor());
 
+			return "redirect:/admin/profesores/listado.html?mensaje=correcto";
 		}
 
 	}
 
 	@RequestMapping(value = "/eliminar.html", method = RequestMethod.GET)
-	public String eliminar(@RequestParam("id") Long id, Model model) {
+	public String eliminar(@RequestParam("id") Long id, Model model) throws ServiceException, DaoException {
 
 		if (id == null) {
 			return "redirect:/admin/profesores/listado.html?mensaje=errorId";
 		} else {
-			Profesor profesor = this.profesorService.find(id);
+			Profesor profesor = this.profesorService.buscar(id);
 			if (profesor != null) {
-				this.profesorService.delete(id);
+				this.profesorService.eliminar(profesor);
 				return "redirect:/admin/profesores/listado.html?mensaje=correcto";
 			} else {
 				return "redirect:/admin/profesores/listado.html?mensaje=errorId";
