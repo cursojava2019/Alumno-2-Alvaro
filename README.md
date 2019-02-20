@@ -11,7 +11,7 @@
   1. Proyecto AcademiaMVC-JPA (en progreso)
   
 **__5. Angular__**
-  1. Ejercicios Angular 1 (5/6)
+  1. Ejercicios Angular 1 (✓)
   2. Proyecto AcademiaAngular (En progreso)
 
 **__X. Complemento al curso__**
