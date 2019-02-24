@@ -9,12 +9,12 @@ export class AcademiaComponent implements OnInit {
 
   collapedSideBar: boolean;
 
-    constructor() {}
+  constructor() {}
 
-    ngOnInit() {}
+  ngOnInit() {}
 
-    receiveCollapsed($event) {
-        this.collapedSideBar = $event;
-    }
+  receiveCollapsed($event) {
+      this.collapedSideBar = $event;
+  }
 
 }

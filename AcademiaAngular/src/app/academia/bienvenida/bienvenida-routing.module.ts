@@ -5,8 +5,8 @@ import { BienvenidaComponent } from './bienvenida.component';
 const routes: Routes = [
   {
       path: '',
-      component: BienvenidaComponent,
-   }
+      component: BienvenidaComponent
+  }
 ];
 
 @NgModule({

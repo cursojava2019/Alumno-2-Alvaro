@@ -1,52 +1,48 @@
 package es.indra.academia.model.entities;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.*;
+import java.util.List;
+
 
 /**
  * The persistent class for the responsable_alumno database table.
  * 
  */
 @Entity
-@Table(name = "responsable_alumno")
-@NamedQuery(name = "ResponsableAlumno.findAll", query = "SELECT r FROM ResponsableAlumno r")
+@Table(name="responsable_alumno")
+@NamedQuery(name="ResponsableAlumno.findAll", query="SELECT r FROM ResponsableAlumno r")
 public class ResponsableAlumno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(unique=true, nullable=false)
 	private Long id;
+
 	@Column(length=100)
 	private String apellido1;
+
 	@Column(length=100)
 	private String apellido2;
+
 	@Column(length=100)
 	private String correo;
+
 	@Column(length=9)
 	private String nif;
+
 	@Column(length=100)
 	private String nombre;
-	@Column(length=20)
+
+	@Column(length=9)
 	private String telefono;
 
-	// bi-directional many-to-one association to Alumno
-	@OneToMany(mappedBy = "responsableAlumno", fetch = FetchType.EAGER)
+	//bi-directional many-to-one association to Alumno
+	@OneToMany(mappedBy="responsableAlumno", cascade={CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.EAGER)
 	private List<Alumno> alumnos;
 
 	public ResponsableAlumno() {
-	}
-
-	public ResponsableAlumno(Long id) {
-		super();
-		this.id = id;
-		this.nif = "";
-		this.nombre = "Sin especificar";
-		this.apellido1 = "";
-		this.apellido2 = "";
-		this.telefono = "";
-		this.correo = "";
 	}
 
 	public Long getId() {
@@ -129,9 +125,10 @@ public class ResponsableAlumno implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ResponsableAlumno [id=" + id + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", correo="
-				+ correo + ", nif=" + nif + ", nombre=" + nombre + ", telefono=" + telefono + ", alumnos=" + alumnos
-				+ "]";
+		return  nombre+" "+ apellido1+" "+ apellido2 ; 
+				
 	}
+	
+	
 
 }

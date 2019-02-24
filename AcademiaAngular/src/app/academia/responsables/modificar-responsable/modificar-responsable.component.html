@@ -1,0 +1,9 @@
+<div [@routerTransition]>
+
+  <app-page-header [heading]="'Modificar Responsable'" [icon]="'fa-edit'"></app-page-header>
+  <div class="row">
+    <div class="col-12">
+      <app-formulario-responsable *ngIf="responsableActual!=null" [modificar]='true' [responsableModificar]="responsableActual" (modificado)="modificar($event)"></app-formulario-responsable>
+    </div>
+  </div>
+</div>

@@ -12,16 +12,15 @@ import { Router } from '@angular/router';
 })
 export class CrearAlumnoComponent implements OnInit {
 
-  constructor(private alumnoService: AlumnoService, private router: Router ) { }
+  constructor(private alumnoService: AlumnoService, private router: Router) { }
 
   ngOnInit() {
   }
 
-   crear(a: Alumno) {
-     this.alumnoService.create(a).subscribe(data => {
+  crear(a: Alumno) {
+    this.alumnoService.create(a).subscribe(data => {
       this.router.navigate(['alumnos']);
      });
-
-   }
+  }
 
 }

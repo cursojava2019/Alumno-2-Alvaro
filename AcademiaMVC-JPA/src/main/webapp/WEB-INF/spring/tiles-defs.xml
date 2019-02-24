@@ -1,48 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+<!DOCTYPE tiles-definitions PUBLIC 
+	"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 
 <tiles-definitions>
 
 	<!-- Default Main Template -->
     <definition name=".mainTemplate" template="/WEB-INF/jsp/plantilla/base.jsp">
-        <put-attribute name="title" value="Gestion de Academia Jose Molino" type="string" />
-
+        <put-attribute name="title" value="Gestion de Academia Juanchu" type="string" />
+       
         <put-attribute name="head" value="/WEB-INF/jsp/plantilla/head.jsp" />
         <put-attribute name="cabecera" value="/WEB-INF/jsp/plantilla/cabecera.jsp"/>
-
+        
         <put-attribute name="content" value="/WEB-INF/jsp/inicio.jsp" />
         <put-attribute name="script" value="/WEB-INF/jsp/plantilla/javascriptPie.jsp" />
     </definition>
-
+    
      <definition name=".mainTemplatePublic" template="/WEB-INF/jsp/plantilla/base.jsp">
-        <put-attribute name="title" value="Gestion de Academia Jose Molino" type="string" />
-
+        <put-attribute name="title" value="Gestion de Academia Juanchu" type="string" />
+       
         <put-attribute name="head" value="/WEB-INF/jsp/plantilla/head.jsp" />
         <put-attribute name="cabecera" value=""/>
-
+        
         <put-attribute name="content" value="/WEB-INF/jsp/inicio.jsp" />
         <put-attribute name="script" value="/WEB-INF/jsp/plantilla/javascriptPie.jsp" />
     </definition>
+    
+    
+   
+    
+    
+    
 
-
+    
 <!--    Public -->
     <definition name="index" extends=".mainTemplatePublic">
 		<put-attribute name="title" value="Inicio" type="string" />
 		<put-attribute name="content" value="/WEB-INF/jsp/index.jsp" />
-
+		
 	</definition>
 <!--  Private -->
 	<definition name="inicio" extends=".mainTemplate">
 		<put-attribute name="title" value="Inicio" type="string" />
 		<put-attribute name="content" value="/WEB-INF/jsp/inicio.jsp" />
 	</definition>
-	<definition name="base/sinpermisos" extends=".mainTemplate">
+	<definition name="base/sinPermisos" extends=".mainTemplate">
 		<put-attribute name="title" value="Sin Permisos" type="string" />
-		<put-attribute name="content" value="/WEB-INF/jsp/sinpermisos.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/sinPermisos.jsp" />
 	</definition>
-
+	
 <!-- 	Alumnos -->
 	<definition name="alumnos/listado" extends=".mainTemplate">
 		<put-attribute name="title" value="Listado de Alumnos" type="string" />
@@ -51,40 +58,50 @@
 	<definition name="alumnos/nuevo" extends=".mainTemplate">
 		<put-attribute name="title" value="Crear Alumnos" type="string" />
 		<put-attribute name="content" value="/WEB-INF/jsp/alumnos/nuevo.jsp" />
-
+		
 	</definition>
 	<definition name="alumnos/modificar" extends=".mainTemplate">
 		<put-attribute name="title" value="Modificar Alumnos" type="string" />
 		<put-attribute name="content" value="/WEB-INF/jsp/alumnos/modificar.jsp" />
 	</definition>
-<!-- 	Profesores -->
-	<definition name="profesores/listado" extends=".mainTemplate">
-		<put-attribute name="title" value="Listado de Profesores" type="string" />
-		<put-attribute name="content" value="/WEB-INF/jsp/profesores/listado.jsp" />
+	
+<!--  Profesor -->
+	<definition name="profesor/listado" extends=".mainTemplate">
+		<put-attribute name="title" value="Listado de Profesor" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/profesor/listado.jsp" />
 	</definition>
-	<definition name="profesores/nuevo" extends=".mainTemplate">
+	<definition name="profesor/nuevo" extends=".mainTemplate">
 		<put-attribute name="title" value="Crear Profesor" type="string" />
-		<put-attribute name="content" value="/WEB-INF/jsp/profesores/nuevo.jsp" />
-
+		<put-attribute name="content" value="/WEB-INF/jsp/profesor/nuevo.jsp" />
+		
 	</definition>
-	<definition name="profesores/modificar" extends=".mainTemplate">
+	<definition name="profesor/modificar" extends=".mainTemplate">
 		<put-attribute name="title" value="Modificar Profesor" type="string" />
-		<put-attribute name="content" value="/WEB-INF/jsp/profesores/modificar.jsp" />
+		<put-attribute name="content" value="/WEB-INF/jsp/profesor/modificar.jsp" />
 	</definition>
-<!-- 	Responsables -->
-	<definition name="responsables/listado" extends=".mainTemplate">
-		<put-attribute name="title" value="Listado de Responsables" type="string" />
-		<put-attribute name="content" value="/WEB-INF/jsp/responsables/listado.jsp" />
+	
+	<!--  Responsable -->
+	<definition name="responsable/listado" extends=".mainTemplate">
+		<put-attribute name="title" value="Listado de Responsable" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/responsable/listado.jsp" />
 	</definition>
-	<definition name="responsables/nuevo" extends=".mainTemplate">
+	<definition name="responsable/nuevo" extends=".mainTemplate">
 		<put-attribute name="title" value="Crear Responsable" type="string" />
-		<put-attribute name="content" value="/WEB-INF/jsp/responsables/nuevo.jsp" />
-
+		<put-attribute name="content" value="/WEB-INF/jsp/responsable/nuevo.jsp" />
+		
 	</definition>
-	<definition name="responsables/modificar" extends=".mainTemplate">
-		<put-attribute name="title" value="Modificar Profesor" type="string" />
-		<put-attribute name="content" value="/WEB-INF/jsp/responsables/modificar.jsp" />
+	<definition name="responsable/modificar" extends=".mainTemplate">
+		<put-attribute name="title" value="Modificar Responsable" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/responsable/modificar.jsp" />
 	</definition>
+	<definition name="responsable/detalles" extends=".mainTemplate">
+		<put-attribute name="title" value="Detalles" type="string" />
+		<put-attribute name="content" value="/WEB-INF/jsp/responsable/detalles.jsp" />
+	</definition>
+	
+
+	
 
 
-</tiles-definitions> 
+	
+</tiles-definitions>

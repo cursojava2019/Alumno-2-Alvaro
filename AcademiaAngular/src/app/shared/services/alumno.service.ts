@@ -8,7 +8,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AlumnoService {
+
   url = 'http://localhost:8080/academiaWeb/services/alumnos/';
+
   constructor(private http: HttpClient) {
 
   }
@@ -21,14 +23,18 @@ export class AlumnoService {
     console.log('id FindById ' + id);
     return this.http.get<Alumno>(this.url + id);
   }
+
   create(a: Alumno): Observable<Alumno> {
-   return this.http.post<Alumno>(this.url, a);
+    return this.http.post<Alumno>(this.url, a);
   }
-  delete(id: number): Observable<any> {
+
+  delete(id: number ): Observable<any> {
     return this.http.delete(this.url + id);
   }
+
   modificar(a: Alumno): Observable<any> {
     console.log(a);
     return this.http.put(this.url + a.id, a);
   }
+
 }

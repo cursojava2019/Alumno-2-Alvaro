@@ -2,7 +2,6 @@ package es.indra.academia.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -10,25 +9,25 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="curso")
 @NamedQuery(name="Curso.findAll", query="SELECT c FROM Curso c")
 public class Curso implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(unique=true, nullable=false)
 	private Long id;
 
+	@Column(nullable=false, length=50)
 	private String etapa;
 
+	@Column(nullable=false, length=50)
 	private String nivel;
 
 	//bi-directional one-to-one association to Asignatura
-	@OneToOne(mappedBy="curso1")
+	@OneToOne(mappedBy="curso")
 	private Asignatura asignatura;
-
-	//bi-directional many-to-one association to Asignatura
-	@OneToMany(mappedBy="curso", fetch=FetchType.EAGER)
-	private List<Asignatura> asignaturas;
 
 	public Curso() {
 	}
@@ -63,28 +62,6 @@ public class Curso implements Serializable {
 
 	public void setAsignatura(Asignatura asignatura) {
 		this.asignatura = asignatura;
-	}
-
-	public List<Asignatura> getAsignaturas() {
-		return this.asignaturas;
-	}
-
-	public void setAsignaturas(List<Asignatura> asignaturas) {
-		this.asignaturas = asignaturas;
-	}
-
-	public Asignatura addAsignatura(Asignatura asignatura) {
-		getAsignaturas().add(asignatura);
-		asignatura.setCurso(this);
-
-		return asignatura;
-	}
-
-	public Asignatura removeAsignatura(Asignatura asignatura) {
-		getAsignaturas().remove(asignatura);
-		asignatura.setCurso(null);
-
-		return asignatura;
 	}
 
 }

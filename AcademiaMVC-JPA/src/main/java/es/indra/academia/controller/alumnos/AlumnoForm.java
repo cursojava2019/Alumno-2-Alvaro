@@ -1,7 +1,9 @@
 package es.indra.academia.controller.alumnos;
 
-import java.util.Calendar;
+import java.sql.Timestamp;
+import java.util.Date;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -11,6 +13,9 @@ import javax.validation.constraints.Size;
 
 import es.indra.academia.model.entities.Alumno;
 import es.indra.academia.model.entities.ResponsableAlumno;
+import es.indra.academia.model.service.ResponsableJpaService;
+import es.indra.academia.model.support.DaoException;
+import es.indra.academia.model.support.ServiceException;
 
 public class AlumnoForm {
 	@Positive
@@ -21,23 +26,25 @@ public class AlumnoForm {
 	private String nombre;
 	@NotNull
 	@NotEmpty
+	@Size(min = 3, max = 100)
 	private String apellido1;
 	private String apellido2;
-	@Size(min = 3, max = 9)
+	@Size(min = 9, max = 9)
 	private String nif;
-
+	
 	private String telefono;
 	@Email
 	@NotEmpty
 	private String correo;
 	private Boolean repetidor;
 	@PastOrPresent
-	private Calendar fechaAlta;
-	private Calendar fechaBaja;
+	private Timestamp fechaalta;
+
+	private Timestamp fechabaja;
 	@Size(min = 0, max = 500)
 	private String observaciones;
-	private ResponsableAlumno responsableAlumno;
-
+	private ResponsableAlumno responsable;
+	
 	public AlumnoForm() {
 		super();
 		this.nif = "";
@@ -61,13 +68,12 @@ public class AlumnoForm {
 		this.correo = (a.getCorreo());
 		this.observaciones = (a.getObservaciones());
 		this.repetidor = (a.getRepetidor());
-		this.fechaAlta = (a.getFechaAlta());
-		this.fechaBaja = (a.getFechaBaja());
-		this.responsableAlumno = (a.getResponsableAlumno());
-
+		this.responsable=(a.getResponsableAlumno());
+		//this.fechaAlta = (a.getFechaAlta());
+		//this.fechaBaja = (a.getFechaBaja());
 	}
 
-	public Alumno obtenerAlumno() {
+	public Alumno obtenerAlumno() throws ServiceException, DaoException {
 		Alumno a = new Alumno();
 		a.setId(getId());
 		a.setNif(getNif());
@@ -78,14 +84,13 @@ public class AlumnoForm {
 		a.setCorreo(getCorreo());
 		a.setObservaciones(getObservaciones());
 		a.setRepetidor(getRepetidor());
-		a.setFechaAlta(getFechaAlta());
-		a.setFechaBaja(getFechaBaja());
-		a.setResponsableAlumno(getResponsableAlumno());
+		a.setResponsableAlumno(getResponsable());
+		
 		return a;
 	}
-
-	public void modificar(Alumno a) {
-
+	public Alumno obtenernuevoalumno() throws ServiceException, DaoException {
+		Alumno a = new Alumno();
+		a.setId(getId());
 		a.setNif(getNif());
 		a.setNombre(getNombre());
 		a.setApellido1(getApellido1());
@@ -94,11 +99,44 @@ public class AlumnoForm {
 		a.setCorreo(getCorreo());
 		a.setObservaciones(getObservaciones());
 		a.setRepetidor(getRepetidor());
-		a.setFechaAlta(getFechaAlta());
-		a.setFechaBaja(getFechaBaja());
-		a.setResponsableAlumno(getResponsableAlumno());
-
+		return a;
 	}
+	
+	public void actualizar (Alumno a) {
+		a.setId(getId());
+		a.setNif(getNif());
+		a.setNombre(getNombre());
+		a.setApellido1(getApellido1());
+		a.setApellido2(getApellido2());
+		a.setTelefono(getTelefono());
+		a.setCorreo(getCorreo());
+		a.setObservaciones(getObservaciones());
+		a.setFechaalta(getFechaalta());
+		a.setFechabaja(getFechabaja());
+		a.setRepetidor(getRepetidor());
+		a.setResponsableAlumno(getResponsable());
+		
+	}
+
+//	public void validar(List<String> errores) {
+//		if (nif == null || nif.equals("")) {
+//			errores.add("El nif es obligatorio");
+//
+//		}
+//		if (nif.length() != 9) {
+//			errores.add("El formato de NIF no es correcto");
+//
+//		}
+//		if (nombre=() == null || getNombre().equals("")) {
+//			errores.add("El Nombre es obligatorio");
+//
+//		}
+//		if (getApellido1() == null || getApellido1().equals("")) {
+//			errores.add("El Primero Apellido es obligatorio");
+//
+//		}
+//
+//	}
 
 	public Long getId() {
 		return this.id;
@@ -164,20 +202,20 @@ public class AlumnoForm {
 		this.repetidor = repetidor;
 	}
 
-	public Calendar getFechaAlta() {
-		return this.fechaAlta;
+	public Timestamp getFechaalta() {
+		return fechaalta;
 	}
 
-	public void setFechaAlta(Calendar fechaAlta) {
-		this.fechaAlta = fechaAlta;
+	public void setFechaalta(Timestamp fechaalta) {
+		this.fechaalta = fechaalta;
 	}
 
-	public Calendar getFechaBaja() {
-		return this.fechaBaja;
+	public Timestamp getFechabaja() {
+		return fechabaja;
 	}
 
-	public void setFechaBaja(Calendar fechaBaja) {
-		this.fechaBaja = fechaBaja;
+	public void setFechabaja(Timestamp fechabaja) {
+		this.fechabaja = fechabaja;
 	}
 
 	public String getObservaciones() {
@@ -188,11 +226,40 @@ public class AlumnoForm {
 		this.observaciones = observaciones;
 	}
 
-	public ResponsableAlumno getResponsableAlumno() {
-		return responsableAlumno;
+/*	public String getFechaAltaString() {
+		if (this.fechaAlta != null) {
+			return Long.toString(this.fechaAlta.getTime());
+		} else {
+			return "";
+		}
 	}
 
-	public void setResponsableAlumno(ResponsableAlumno responsableAlumno) {
-		this.responsableAlumno = responsableAlumno;
+	public String getFechaBajaString() {
+		if (this.fechaBaja != null) {
+			return Long.toString(this.fechaBaja.getTime());
+		} else {
+			return "";
+		}
+	}*/
+
+	
+	public ResponsableAlumno getResponsable() {
+		return responsable;
 	}
+
+	public void setResponsable(ResponsableAlumno responsable) {
+		this.responsable = responsable;
+	}
+
+	/*public void setFechaAltaString(String fechaString) {
+		Long timeStamp = Long.parseLong(fechaString);
+		this.fechaAlta = (new Date(timeStamp));
+
+	}
+
+	public void setFechaBajaString(String fechaString) {
+		Long timeStamp = Long.parseLong(fechaString);
+		this.fechaBaja = (new Date(timeStamp));
+
+	}*/
 }

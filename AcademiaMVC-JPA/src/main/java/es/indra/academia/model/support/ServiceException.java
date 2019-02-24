@@ -1,6 +1,7 @@
 package es.indra.academia.model.support;
 
 public class ServiceException extends RuntimeException {
+
 	/**
 	 * 
 	 */
@@ -30,4 +31,5 @@ public class ServiceException extends RuntimeException {
 		super(cause);
 
 	}
+
 }

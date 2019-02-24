@@ -28,6 +28,7 @@ public class SeguridadFilter implements Filter {
 	/**
 	 * @see Filter#destroy()
 	 */
+	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
 	}
@@ -35,6 +36,7 @@ public class SeguridadFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
+	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest peticion = (HttpServletRequest) request;
@@ -44,7 +46,7 @@ public class SeguridadFilter implements Filter {
 		if (identificador != null && identificador.equals("si")) {
 			chain.doFilter(request, response);
 		} else {
-			respuesta.sendRedirect(peticion.getContextPath() + "/inadex.jsp");
+			respuesta.sendRedirect(peticion.getContextPath() + "/inadex.html");
 
 		}
 	}
@@ -52,6 +54,7 @@ public class SeguridadFilter implements Filter {
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
+	@Override
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
 	}

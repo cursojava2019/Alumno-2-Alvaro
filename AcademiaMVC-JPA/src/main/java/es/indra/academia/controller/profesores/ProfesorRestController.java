@@ -18,20 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import es.indra.academia.model.entities.Profesor;
-import es.indra.academia.model.service.ProfesorService;
+import es.indra.academia.model.service.ProfesorJpaService;
+import es.indra.academia.model.support.DaoException;
+import es.indra.academia.model.support.ServiceException;
 
 @RestController
 public class ProfesorRestController {
 	@Autowired
-	private ProfesorService profesorService;
+	private ProfesorJpaService profesorService;
 	@Autowired
 	ProfesorFormValidator validador;
 	private Logger log = LogManager.getLogger(ProfesorRestController.class);
 
 	@Transactional
 	@RequestMapping(value = "/profesores/", method = RequestMethod.GET)
-	public ResponseEntity<List<Profesor>> listar() {
-		List<Profesor> listado = this.profesorService.findAll();
+	public ResponseEntity<List<Profesor>> listar() throws ServiceException, DaoException {
+		List<Profesor> listado = this.profesorService.buscarTodos();
 		if (listado.isEmpty()) {
 			return new ResponseEntity<List<Profesor>>(HttpStatus.NO_CONTENT);
 		} else {
@@ -41,23 +43,23 @@ public class ProfesorRestController {
 
 	@Transactional
 	@RequestMapping(value = "/profesores/{id}", method = RequestMethod.GET)
-	public ResponseEntity<Profesor> obtenerProfesor(@PathVariable("id") Long id) {
+	public ResponseEntity<Profesor> obtenerAlumno(@PathVariable("id") Long id) throws ServiceException, DaoException {
 
-		Profesor p = this.profesorService.find(id);
+		Profesor a = this.profesorService.buscar(id);
 
-		if (p == null) {
+		if (a == null) {
 			return new ResponseEntity<Profesor>(HttpStatus.NO_CONTENT);
 		} else {
-			p.getId();
-			return new ResponseEntity<Profesor>(p, HttpStatus.OK);
+			a.getId();
+			return new ResponseEntity<Profesor>(a, HttpStatus.OK);
 		}
 	}
 
 	@Transactional
 	@RequestMapping(value = "/profesores/", method = RequestMethod.POST)
-	public ResponseEntity<Void> crearProfesor(@RequestBody Profesor profesor, BindingResult bindingResult,
-			UriComponentsBuilder ucBuilder) {
-		this.profesorService.create(profesor);
+	public ResponseEntity<Void> crearAlumno(@RequestBody Profesor profesor, BindingResult bindingResult,
+			UriComponentsBuilder ucBuilder) throws ServiceException, DaoException {
+		this.profesorService.crear(profesor);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(ucBuilder.path("/profesores/{id}").buildAndExpand(profesor.getId()).toUri());
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
@@ -65,10 +67,10 @@ public class ProfesorRestController {
 
 	@Transactional
 	@RequestMapping(value = "/profesores/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Profesor> actualizarProfesor(@PathVariable("id") long id, @RequestBody Profesor profesor) {
+	public ResponseEntity<Profesor> actualizarAlumno(@PathVariable("id") long id, @RequestBody Profesor profesor) throws ServiceException, DaoException {
 		System.out.println("Updating User " + id);
 
-		Profesor currentProfesor = this.profesorService.find(id);
+		Profesor currentProfesor = this.profesorService.buscar(id);
 
 		if (currentProfesor == null) {
 			;
@@ -78,21 +80,26 @@ public class ProfesorRestController {
 		currentProfesor.setNombre(profesor.getNombre());
 		currentProfesor.setApellido1(profesor.getApellido1());
 		currentProfesor.setApellido2(profesor.getApellido2());
+		currentProfesor.setNif(profesor.getNif());
 		currentProfesor.setCorreo(profesor.getCorreo());
+		currentProfesor.setTelefono(profesor.getTelefono());
+		currentProfesor.setTitulacion(profesor.getTitulacion());
 
-		this.profesorService.update(currentProfesor);
+		this.profesorService.modificar(currentProfesor);
 		return new ResponseEntity<Profesor>(currentProfesor, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/profesores/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Profesor> deleteUser(@PathVariable("id") Long id) {
-		Profesor currentProfesor = this.profesorService.find(id);
-		if (currentProfesor == null) {
-			;
+	public ResponseEntity<Profesor> deleteUser(@PathVariable("id") Long id) throws ServiceException, DaoException {
+		Profesor currentAlumno = this.profesorService.buscar(id);
+		if (currentAlumno == null) {
+			
 			return new ResponseEntity<Profesor>(HttpStatus.NOT_FOUND);
-		}
-		this.profesorService.delete(id);
-		return new ResponseEntity<Profesor>(HttpStatus.NO_CONTENT);
+		}else 
+		this.profesorService.eliminarById(id);
+		return new ResponseEntity<Profesor>(HttpStatus.OK);
+		
 	}
+
 
 }

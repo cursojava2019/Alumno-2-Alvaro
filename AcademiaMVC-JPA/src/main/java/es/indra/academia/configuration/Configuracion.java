@@ -35,13 +35,14 @@ public class Configuracion {
 	public Connection obtenerConexionBD() throws SQLException {
 		String url = this.parametros.getProperty("bbdd.url");
 		String usuario = this.parametros.getProperty("bbdd.usuario");
-		String pass = this.parametros.getProperty("bbdd.pass");
+		String pass = this.parametros.getProperty("bbdd.password");
 		try {
 			Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException e) {
+
 			e.printStackTrace();
 		}
-		Connection co = DriverManager.getConnection(url, usuario,pass);
+		Connection co = DriverManager.getConnection(url, usuario, pass);
 		return co;
 	}
 

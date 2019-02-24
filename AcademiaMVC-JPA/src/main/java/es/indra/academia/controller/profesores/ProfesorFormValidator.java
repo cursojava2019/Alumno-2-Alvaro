@@ -10,9 +10,9 @@ import org.springframework.validation.Validator;
 import es.indra.academia.model.entities.Profesor;
 import es.indra.academia.model.service.ProfesorJpaService;
 
+
 @Component
 public class ProfesorFormValidator implements Validator {
-
 	@Autowired
 	private ProfesorJpaService profesorService;
 
@@ -24,16 +24,11 @@ public class ProfesorFormValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		ProfesorForm form = (ProfesorForm) target;
-		if (form.getNif() != null && !form.getNif().equals("")) {
-			List<Profesor> listado = this.profesorService.buscarNif(form.getNif());
-			if (listado != null && !listado.isEmpty()) {
-				Profesor profesor = listado.get(0);
-				if (form.getId() == null || (!profesor.getId().equals(form.getId()))) {
-					errors.rejectValue("nif", "nif.unico");
-				}
-			}
-		}
-
+		
+		
+	if(form.getTelefono().length()!=9) {
+		errors.rejectValue("telefono", "telefono.tamanio");
+	}
 	}
 
 }

@@ -1,6 +1,9 @@
-export class Alumno {
+import { Responsable } from './responsable';
 
-  constructor (public id: number,
+export class Alumno {
+ public responsable: Responsable;
+  constructor(
+    public id: number,
     public nombre: string,
     public apellido1: string,
     public apellido2: string,
@@ -10,7 +13,8 @@ export class Alumno {
     public nif: string,
     public observaciones: string,
     public repetidor: boolean,
-    public telefono: string) {
-  }
+    public telefono: string,
+    public idResponsable: number) {
 
+  }
 }

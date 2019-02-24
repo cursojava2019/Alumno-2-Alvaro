@@ -1,0 +1,9 @@
+<div [@routerTransition]>
+
+  <app-page-header [heading]="'Nuevo Responsable'" [icon]="'fa-new'" class="text-center"></app-page-header>
+  <div class="row">
+    <div class="col-12">
+      <app-formulario-responsable [modificar]='false' (modificado)="crear($event)"></app-formulario-responsable>
+    </div>
+  </div>
+</div>

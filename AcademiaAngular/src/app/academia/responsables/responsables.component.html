@@ -1,0 +1,50 @@
+<div [@routerTransition]>
+
+  <app-page-header [heading]="'Gestión Responsables'" [icon]="'fa-edit'" class="text-center"></app-page-header>
+  <div class="row">
+    <div class="col col-12">
+        <div class="card mb-3">
+            <div class="card-header text-center" style="margin-top: 50px">
+                <p>Bienvenido a la Gestión de la Academia Juanchu</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-12">
+      <div class="card mb-3">
+          <div class="card-header">
+              <button class="btn btn-success" (click)="irCrearResponsable()"><i class="fa fa-plus-square"></i> Nuevo responsable</button>
+          </div>
+          <div class="card-body table-responsive">
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th>NIF</th>
+                      <th>Nombre</th>
+                      <th>Apellidos</th>
+                      <th>Teléfono</th>
+                      <th>Opciones</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of responsables">
+                      <th scope="row">{{item.nif}}</th>
+                      <td>{{item.nombre}}</td>
+                      <td>{{item.apellido1}} {{item.apellido2}}</td>
+                      <td>{{item.telefono}}</td>
+                      <td>
+                          <button (click)="modificar(item.id)" class="btn btn-primary"><i class="fa fa-pencil"></i> Modificar</button>
+                          <button (click)="eliminar(item.id)" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</button>
+                          <button (click)="listado(item.id)" class="btn btn-info"><i class="fa fa-plus-square"></i> Detalles</button>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+  </div>
+

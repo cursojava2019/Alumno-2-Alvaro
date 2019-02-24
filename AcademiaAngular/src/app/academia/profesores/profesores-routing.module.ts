@@ -7,10 +7,11 @@ import { ModificarProfesorComponent } from './modificar-profesor/modificar-profe
 const routes: Routes = [
   {
       path: '',
-      component: ProfesoresComponent,
-   },
-   { path: 'crear', component: CrearProfesorComponent },
-   { path: 'modificar/:idProfesor', component: ModificarProfesorComponent }
+      component: ProfesoresComponent
+  },
+
+  { path: 'crear', component: CrearProfesorComponent},
+  { path: 'modificar/:idProfesor', component: ModificarProfesorComponent}
 
 ];
 

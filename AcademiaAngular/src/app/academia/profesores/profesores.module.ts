@@ -5,15 +5,17 @@ import { ProfesoresRoutingModule } from './profesores-routing.module';
 import { ProfesoresComponent } from './profesores.component';
 import { PageHeaderModule } from '../../shared';
 import { CrearProfesorComponent } from './crear-profesor/crear-profesor.component';
-import { ModificarProfesorComponent } from './modificar-profesor/modificar-profesor.component';
 import { FormularioProfesorComponent } from './formulario-profesor/formulario-profesor.component';
+import { ModificarProfesorComponent } from './modificar-profesor/modificar-profesor.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ProfesoresComponent, CrearProfesorComponent, ModificarProfesorComponent, FormularioProfesorComponent],
+  declarations: [ProfesoresComponent, CrearProfesorComponent, FormularioProfesorComponent, ModificarProfesorComponent],
   imports: [
     CommonModule,
-    ProfesoresRoutingModule, PageHeaderModule, ReactiveFormsModule
+    ProfesoresRoutingModule,
+    PageHeaderModule,
+    ReactiveFormsModule
   ]
 })
 export class ProfesoresModule { }

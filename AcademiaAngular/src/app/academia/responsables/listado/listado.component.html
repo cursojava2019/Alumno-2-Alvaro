@@ -1,0 +1,39 @@
+<div [@routerTransition]>
+
+  <app-page-header [heading]="'Gestión Responsables'" [icon]="'fa-edit'" class="text-center"></app-page-header>
+  <div class="row">
+    <div class="col col-12">
+        <div class="card mb-3 text-center">
+            <h4>Alumnos asignados al responsable {{responsable.nombre}} {{responsable.apellido1}}</h4>
+        </div>
+        <button class="btn btn-success" routerLink="/responsables" [routerLinkActive]="['router-link-active']"> Volver Responsables</button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col col-12">
+      <div class="card mb-3">
+          <div class="card-body table-responsive">
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th>NIF</th>
+                      <th>Nombre</th>
+                      <th>Apellidos</th>
+                      <th>Teléfono</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of responsable.alumnos">
+                      <th scope="row">{{item.nif}}</th>
+                      <td>{{item.nombre}}</td>
+                      <td>{{item.apellido1}} {{item.apellido2}}</td>
+                      <td>{{item.telefono}}</td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+  </div>

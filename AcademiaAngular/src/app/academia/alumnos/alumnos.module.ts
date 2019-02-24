@@ -5,15 +5,17 @@ import { AlumnosRoutingModule } from './alumnos-routing.module';
 import { AlumnosComponent } from './alumnos.component';
 import { PageHeaderModule } from '../../shared';
 import { CrearAlumnoComponent } from './crear-alumno/crear-alumno.component';
-import { ModicarAlumnoComponent } from './modicar-alumno/modicar-alumno.component';
+import { ModificarAlumnoComponent } from './modificar-alumno/modificar-alumno.component';
 import { FormularioAlumnoComponent } from './formulario-alumno/formulario-alumno.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AlumnosComponent, CrearAlumnoComponent, ModicarAlumnoComponent, FormularioAlumnoComponent],
+  declarations: [AlumnosComponent, CrearAlumnoComponent, ModificarAlumnoComponent, FormularioAlumnoComponent],
   imports: [
     CommonModule,
-    AlumnosRoutingModule, PageHeaderModule, ReactiveFormsModule
+    AlumnosRoutingModule,
+    PageHeaderModule,
+    ReactiveFormsModule
   ]
 })
 export class AlumnosModule { }
